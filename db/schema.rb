@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_14_092526) do
+ActiveRecord::Schema.define(version: 2021_11_17_142650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,14 +37,19 @@ ActiveRecord::Schema.define(version: 2021_11_14_092526) do
 
   create_table "outings", force: :cascade do |t|
     t.bigint "couple_id", null: false
-    t.bigint "spot_id", null: false
+    t.integer "spot_id"
     t.integer "rating"
     t.datetime "attend_on"
     t.string "images"
-    t.boolean "is_complete"
-    t.boolean "is_favorite"
+    t.boolean "is_complete", default: false
+    t.boolean "is_favorite", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+    t.string "description"
+    t.integer "mood"
+    t.integer "price"
+    t.integer "genre"
     t.index ["couple_id"], name: "index_outings_on_couple_id"
     t.index ["spot_id"], name: "index_outings_on_spot_id"
   end

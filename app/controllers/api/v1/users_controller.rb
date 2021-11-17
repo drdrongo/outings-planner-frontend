@@ -3,18 +3,18 @@ class Api::V1::UsersController < ApplicationController
     params[:id] && @user = User.find(params[:id])
 
     if @user
-      render json: { success: true, user: @user }
+      render json: @user, status: 200
     else
-      render json: { success: false }
+      render json: { errors: @user.errors.full_messages }, status: 422
     end
   end
 
   def index
     @users = User.all
     if @users
-      render json: { success: true, users: @users}
+      render json: @users, status: 200
     else
-      render json: { success: false }
+      render json: { errors: @users.errors.full_messages }, status: 422
     end
   end
 
