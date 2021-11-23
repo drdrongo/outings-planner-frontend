@@ -2,7 +2,6 @@ class Api::V1::UsersController < ApplicationController
   def show
     params[:id] && @user = User.find(params[:id])
 
-    
     if @user
       render json: @user, status: 200
     else
