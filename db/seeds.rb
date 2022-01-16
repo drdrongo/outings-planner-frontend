@@ -38,16 +38,19 @@
 
 couple = Couple.find(1)
 
+Outing.delete_all
+
 10.times do
   outing = Outing.new(
     couple_id: couple.id,
     is_complete: false,
     is_favorite: false,
     title: Faker::Hobby.activity,
-    description: Faker::Lorem.sentences,
+    description: Faker::Lorem.sentences.join(' '),
     price: rand(1..5),
     mood: rand(1..5),
-    genre: rand(1..10)
+    genre: rand(1..10),
+    rating: rand(1..5),
   )
   outing.save
 end

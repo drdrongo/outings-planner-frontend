@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       resources :users
       resources :spots
       resources :outings
+      # namespace :outings do
+        post 'outings/toggle_favorite', action: :toggle_favorite, controller: 'outings'
+      # end
+
       resources :outing_reviews
       resources :couples
     end

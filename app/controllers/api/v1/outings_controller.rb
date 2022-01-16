@@ -1,10 +1,10 @@
 class Api::V1::OutingsController < ApplicationController
   def show
-    @outing = Outing.find_by(params[:id])
-    if @outing
-      render json: @outing, status: 200
+    outing = Outing.find(params[:id])
+    if outing
+      render json: outing, status: 200
     else
-      render json: { errors: @outing.errors.full_messages }, status: 422
+      render json: { errors: outing.errors.full_messages }, status: 422
     end
   end
 
@@ -25,6 +25,16 @@ class Api::V1::OutingsController < ApplicationController
   end
 
   def delete
+  end
+
+  def toggle_favorite
+    outing = Outing.find(params[:id])
+    if outing
+      outing.update(is_favorite: !outing.is_favorite)
+      render json: outing, status: 200
+    else
+      render json: { errors: outing.errors.full_messages }, status: 422
+    end
   end
 
   private
