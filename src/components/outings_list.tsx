@@ -2,11 +2,12 @@ import { Outing } from '../data/outings';
 import {
 	NavLink,
 	useLocation,
+	NavLinkProps
 } from 'react-router-dom';
 
-function QueryNavLink({ to = '', ...props }) {
+function QueryNavLink({ to = '', ...props }: NavLinkProps) {
 	const location = useLocation();
-	return <NavLink to={to + location.search} {...props} />;
+	return <NavLink to={to + location.search} {...props}/>;
 }
 
 interface OutingItemProps {
