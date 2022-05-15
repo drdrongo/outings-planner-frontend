@@ -1,0 +1,14 @@
+#login-form {
+  position: absolute;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 23rem;
+  z-index: 999;
+  height: 40rem;
+  top: 2rem;
+  right: 2rem;
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+}

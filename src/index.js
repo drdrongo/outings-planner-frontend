@@ -10,13 +10,15 @@ import OutingsShow from './routes/outing';
 import ThemeProvider from './providers/theme_provider';
 import OutingsProvider from './providers/outings_provider';
 import Swiper from './routes/swiper';
-import NewOuting from './routes/new_outing';
-import NewUser from './routes/new_user';
+import NewOuting from './routes/new_outing/new_outing';
+import NewUser from './routes/new_user/new_user';
 import Users from './routes/users';
+import AuthProvider from './providers/auth_provider';
 
 ReactDOM.render(
 	<OutingsProvider>
 	<ThemeProvider>
+	<AuthProvider>
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />}>
@@ -47,6 +49,7 @@ ReactDOM.render(
 				</Route>
 			</Routes>
 		</BrowserRouter>
+	</AuthProvider>
 	</ThemeProvider>
 	</OutingsProvider>
 	,
