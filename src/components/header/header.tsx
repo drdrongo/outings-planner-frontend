@@ -9,6 +9,7 @@ import { saveJwt } from '../../service/jwt';
 import http from '../../data/http';
 import './styles.scss';
 import InputField from '../input_field';
+import { useAuthContext } from '../../contexts/auth_context';
 
 type FormData = {
 	f_name: string;
@@ -19,27 +20,27 @@ type FormData = {
 };
 
 export function LoginForm() {
+	const { updateMe } = useAuthContext();
+
 	const {
-		register,
 		handleSubmit,
 		control,
-		formState: { errors },
 	} = useForm<FormData>();
 
 	const onSubmit = handleSubmit(async (data) => {
 		const url = '/auth/login';
 		const response = await http.post(url, data)
+		console.log({ response })
 		if (response.token && response.token.length) {
 			saveJwt(response.token);
-			console.log({ token: response.token });
 		}
-		return response;
+		if (response.user) {
+			updateMe(response.user);
+		}
 	});
 
 	return (
-		<form
-			id="login-form"
-		>
+		<form id="login-form">
 			<InputField name="email" control={control} label="Email" defaultValue="" />
 			<InputField name="password" control={control} label="Password" defaultValue="" />
 			<Button onClick={onSubmit}>Submit</Button>
@@ -48,6 +49,7 @@ export function LoginForm() {
 }
 
 const Header = () => {
+	const { me } = useAuthContext();
 	const { isLight, theme } = useThemeContext();
 	const [formOpen, setFormOpen] = useState(false);
 
@@ -63,13 +65,14 @@ const Header = () => {
 		>
 			<nav>
 				<ThemeButton />
+				{me.auth && <h3>Hello, {me.email}</h3>}
 				<StyledLink to="/outings">Outings</StyledLink> |{' '}
 				<StyledLink to="/expenses">Expenses</StyledLink> |{' '}
 				<StyledLink to="/swiper">Swiper</StyledLink> |{' '}
 				<StyledLink to="/new_outing">New Outing</StyledLink> |{' '}
 				<StyledLink to="/new_user">New User</StyledLink>
 				<StyledLink to="/users">Users</StyledLink>
-				<Button style={{ marginLeft: 'auto' }} onClick={() => setFormOpen(!formOpen)}>Log in</Button>
+				{!me.auth && <Button style={{ marginLeft: 'auto' }} onClick={() => setFormOpen(!formOpen)}>Log in</Button>}
 			</nav>
 
 			{formOpen && <LoginForm />}

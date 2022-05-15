@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/auth_context';
 import { fetchMe } from '../data/auth';
 
@@ -19,12 +19,18 @@ type Props = {
 const AuthProvider = ({ children }: Props) => {
 	const [me, setMe] = useState<IMe>({ auth: false });
 
+	useEffect(() => {
+		console.log({ me })
+	}, [me])
+
+	const updateMe = (newMe: IMe) => setMe({ ...newMe, auth: true, });
+
 	const getMe = (email: string, password: string) => {
-		fetchMe().then((response: IMe) => setMe(response));
+		fetchMe().then((response: IMe) => setMe({ ...response, auth: true }));
 	};
 
 	return (
-		<AuthContext.Provider value={{ me, getMe }}>
+		<AuthContext.Provider value={{ me, getMe, updateMe }}>
 			{children}
 		</AuthContext.Provider>
 	);
