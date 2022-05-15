@@ -1,6 +1,6 @@
 declare global {
 	interface Window {
-		$http: any;
+		http: any;
 	}
 }
 
@@ -12,7 +12,7 @@ interface httpObj {
 	delete: Function;
 }
 
-var $http: httpObj = {
+var http: httpObj = {
 	makeRequest: () => {},
 	post: () => {},
 	get: () => {},
@@ -31,10 +31,11 @@ function removeEmptyItems(object: object): object {
 	return object;
 }
 
-$http.makeRequest = async function (method: string, api: string, body: object) {
+http.makeRequest = async function (method: string, api: string, body: object) {
 	if (api.startsWith('/')) {
 		api = process.env.REACT_APP_API_BASE + api;
 	}
+	console.log({ api })
 
 	let jsonBody: string = '';
 	const hasBody: boolean = ['POST', 'UPDATE'].includes(method) && !!body;
@@ -56,30 +57,31 @@ $http.makeRequest = async function (method: string, api: string, body: object) {
 		},
 		...(hasBody && { body: jsonBody }),
 	}).then(response => {
+		console.log({ response })
     return response.json();
   })
   .catch(error => {
     return error;
   });
+	console.log({ response2: response})
   
   return response;
 };
 
-$http.get = async function (api: string, params: object) {
-	return await $http.makeRequest('GET', api, params);
+http.get = async function (api: string, params: object) {
+	return await http.makeRequest('GET', api, params);
 };
 
-$http.post = async function (api: string, body: object) {
-	return await $http.makeRequest('POST', api, body);
+http.post = async function (api: string, body: object) {
+	return await http.makeRequest('POST', api, body);
 };
 
-$http.update = async function (api: string, body: object) {
-	return await $http.makeRequest('UPDATE', api, body);
+http.update = async function (api: string, body: object) {
+	return await http.makeRequest('UPDATE', api, body);
 };
 
-$http.delete = async function (api: string, params: object) {
-	return await $http.makeRequest('DELETE', api, params);
+http.delete = async function (api: string, params: object) {
+	return await http.makeRequest('DELETE', api, params);
 };
 
-window.$http = $http;
-export default $http;
+export default http;
