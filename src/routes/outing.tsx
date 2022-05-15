@@ -9,7 +9,7 @@ import { Star, CurrencyYen, Favorite, FavoriteBorder } from '@mui/icons-material
 // import Favorite from '@mui/icons-material/Favorite';
 // import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import { Outing } from '../data/outings';
-import $http from '../data/http';
+import http from '../data/http';
 
 export default function OutingsShow() {
 	const { outings, getOuting, updateOuting } = useContext(OutingsContext);
@@ -24,7 +24,7 @@ export default function OutingsShow() {
 
 	const toggleFavorite = useCallback(async () => {
     const thisId = parseInt(params.outingId, 10);
-		$http.post('/api/v1/outings/toggle_favorite', { id: thisId });
+		http.post('/api/v1/outings/toggle_favorite', { id: thisId });
     
     const outing = outings.find(out => out.id === parseInt(params.outingId, 10));
     if (!outing) {

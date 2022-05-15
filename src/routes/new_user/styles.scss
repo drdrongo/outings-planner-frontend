@@ -1,0 +1,11 @@
+.new-user-form {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  margin: 0 auto;
+  padding-top: 2rem;
+
+  .MuiInputBase-root {
+    margin-bottom: 1rem;
+  }
+}
