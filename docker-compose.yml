@@ -6,6 +6,8 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: yoshi
+    ports:
+      - "5432:5432"
   backend:
     build:
       context: .

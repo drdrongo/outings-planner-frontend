@@ -63,4 +63,10 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+
+
+  # Hayat: Added to ensure we get logs in docker
+  config.logger = Logger.new('/proc/1/fd/1')
+
 end
