@@ -6,18 +6,13 @@ class Api::V1::CouplesController < ApplicationController
     p friend_email
 
     puts '--- this is the friend email2::: '
-    p @friend
     unless @friend
       render json: { errors: @friend.errors.full_messages }, status: 422
     end
 
-    puts "---This is user 1 id---"
-    p couple_params[:user_1_id]
+    @me = User.find(couple_params[:user1_id])
 
-    puts "---This is user 2 id---"
-    p @friend.id
-
-    response = Couple.create!(user_1_id: couple_params[:user_1_id], user_2_id: @friend.id)
+    response = Couple.create!(user1: @me, user2: @friend)
     render json: response
   end
 
@@ -39,11 +34,11 @@ class Api::V1::CouplesController < ApplicationController
 
   def couple_params
     params.require(:couple).permit(
-      :user_1_id,
-      :user_2_id,
+      :user1_id,
+      :user2_id,
       :total_outings,
       {
-        friend_email: ""
+        friend_email: ''
       }
     )
   end
