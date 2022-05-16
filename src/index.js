@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import App from './App';
-import Expenses from './routes/expenses';
 import Outings from './routes/outings';
 import OutingsShow from './routes/outing';
 import ThemeProvider from './providers/theme_provider';
@@ -13,6 +12,7 @@ import Swiper from './routes/swiper';
 import NewOuting from './routes/new_outing/new_outing';
 import NewUser from './routes/new_user/new_user';
 import Users from './routes/users';
+import NewCouple from './routes/new_couple/new_couple';
 import AuthProvider from './providers/auth_provider';
 
 ReactDOM.render(
@@ -22,7 +22,6 @@ ReactDOM.render(
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />}>
-					<Route path="expenses" element={<Expenses />} />
 					<Route path="outings" element={<Outings />}>
 						<Route
 							index
@@ -36,6 +35,7 @@ ReactDOM.render(
 					</Route>
 					<Route path="swiper" element={<Swiper />} />
 					<Route path="new_outing" element={<NewOuting />} />
+					<Route path="new_couple" element={<NewCouple />} />
 					<Route path="new_user" element={<NewUser />} />
 					<Route path="users" element={<Users />} />
 					<Route

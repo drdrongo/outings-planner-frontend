@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import {
 	Outlet,
 	useSearchParams,
@@ -5,13 +6,13 @@ import {
 import OutingsList from '../components/outings_list';
 import { useOutingsContext } from '../contexts/outings_context';
 import { useThemeContext } from '../contexts/theme_context';
+import http from '../data/http';
 
 export default function Outings() {
 	let [searchParams, setSearchParams] = useSearchParams(); // works like setState, but stores data in the search params instead
 
 	const { outings } = useOutingsContext();
 	const { theme, isLight } = useThemeContext();
-	console.log({ theme })
 
 	return (
 		<div className="main" style={{
