@@ -29,8 +29,8 @@
 # u2 = User.find(2)
 
 # couple = Couple.new(
-#   user_1_id: u1.id,
-#   user_2_id: u2.id,
+#   user1_id: u1.id,
+#   user2_id: u2.id,
 #   total_outings: 0
 # )
 # couple.save!

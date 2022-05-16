@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_125700) do
+ActiveRecord::Schema.define(version: 2022_05_16_142535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "couples", force: :cascade do |t|
-    t.integer "user_1_id"
-    t.integer "user_2_id"
+    t.integer "user1_id"
+    t.integer "user2_id"
     t.integer "total_outings"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -67,6 +67,6 @@ Rails.application.configure do
 
 
   # Hayat: Added to ensure we get logs in docker
-  config.logger = Logger.new('/proc/1/fd/1')
+  # config.logger = Logger.new('/proc/1/fd/1')
 
 end
