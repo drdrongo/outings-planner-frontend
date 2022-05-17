@@ -42,7 +42,7 @@ http.makeRequest = async function (method: string, api: string, body: object) {
 
 	if (['GET', 'DELETE'].includes(method)) {
 		const params = new URLSearchParams({ ...body });
-		api += params;
+		api += ('?' + params);
 	} else if (hasBody) {
 		body = removeEmptyItems(body);
 		jsonBody = JSON.stringify(body);

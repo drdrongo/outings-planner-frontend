@@ -14,6 +14,7 @@ import NewUser from './routes/new_user/new_user';
 import Users from './routes/users';
 import NewCouple from './routes/new_couple/new_couple';
 import AuthProvider from './providers/auth_provider';
+import Couples from './routes/couples/couples';
 
 ReactDOM.render(
 	<OutingsProvider>
@@ -35,6 +36,7 @@ ReactDOM.render(
 					</Route>
 					<Route path="swiper" element={<Swiper />} />
 					<Route path="new_outing" element={<NewOuting />} />
+					<Route path="couples" element={<Couples />} />
 					<Route path="new_couple" element={<NewCouple />} />
 					<Route path="new_user" element={<NewUser />} />
 					<Route path="users" element={<Users />} />

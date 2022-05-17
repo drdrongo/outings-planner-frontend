@@ -26,7 +26,7 @@ class Api::V1::CouplesController < ApplicationController
   end
 
   def index
-    @couples = Couple.all
+    @couples = Couple.where('user1_id = ? OR user2_id = ?', params[:user_id], params[:user_id])
     render json: @couples
   end
 

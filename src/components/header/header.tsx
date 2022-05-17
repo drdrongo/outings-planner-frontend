@@ -66,12 +66,13 @@ const Header = () => {
 			<nav>
 				<ThemeButton />
 				{me.auth && <h3>Hello, {me.email}</h3>}
-				<StyledLink to="/outings">Outings</StyledLink> |{' '}
-				<StyledLink to="/swiper">Swiper</StyledLink> |{' '}
+				{/* <StyledLink to="/swiper">Swiper</StyledLink> |{' '} */}
 				<StyledLink to="/new_outing">New Outing</StyledLink> |{' '}
+				<StyledLink to="/outings">Outings</StyledLink> ||{' '}
 				<StyledLink to="/new_user">New User</StyledLink> |{' '}
+				<StyledLink to="/users">Users</StyledLink> ||{' '}
 				<StyledLink to="/new_couple">New Couple</StyledLink> |{' '}
-				<StyledLink to="/users">Users</StyledLink>
+				<StyledLink to="/couples">Couples</StyledLink> ||{' '}
 				{!me.auth && <Button style={{ marginLeft: 'auto' }} onClick={() => setFormOpen(!formOpen)}>Log in</Button>}
 			</nav>
 

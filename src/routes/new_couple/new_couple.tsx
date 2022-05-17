@@ -1,8 +1,5 @@
-import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import InputField from '../../components/input_field';
-import NumberField from '../../components/number_field';
-import SelectField from '../../components/select_field';
 import { useAuthContext } from '../../contexts/auth_context';
 import http from '../../data/http';
 
@@ -11,18 +8,15 @@ type FormData = {
 };
 
 export default function NewCouple() {
+	const { me } = useAuthContext();
+
 	const {
-		register,
 		control,
 		handleSubmit,
-		formState: { errors },
 	} = useForm<FormData>();
-
-	const { me } = useAuthContext();
 
 	const onSubmit = handleSubmit(async data => {
 		if (!me.id) return;
-		console.log({ data, me: me.id})
 
 		const response = await http.post('/api/v1/couples', {
 			friend_email: data.friend_email,
