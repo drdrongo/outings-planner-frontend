@@ -1,6 +1,5 @@
 class AuthenticationController < ApplicationController
-
-  before_action :authorize_request, except: :login
+  before_action :authorize_request, except: [:login]
 
   # POST /auth/login
   def login
@@ -15,6 +14,20 @@ class AuthenticationController < ApplicationController
       }, status: :ok
     else
       render json: { error: 'unauthorized' }, status: :unauthorized
+    end
+  end
+
+  def verify_jwt
+    header = request.headers['Authorization']
+    header = header.split(' ').last if header
+    begin
+      @decoded = JsonWebToken.decode(header)
+      @current_user = User.find(@decoded[:user_id])
+      render json: @current_user, status: :ok
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: e.message }, status: :unauthorized
+    rescue JWT::DecodeError => e
+      render json: { errors: e.message }, status: :unauthorized
     end
   end
 

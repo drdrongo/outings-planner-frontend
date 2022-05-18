@@ -1,3 +1,5 @@
+import { getJwt } from "../service/jwt";
+
 declare global {
 	interface Window {
 		http: any;
@@ -32,17 +34,20 @@ function removeEmptyItems(object: object): object {
 }
 
 http.makeRequest = async function (method: string, api: string, body: object) {
+	const jwt = getJwt();
+
 	if (api.startsWith('/')) {
 		api = process.env.REACT_APP_API_BASE + api;
 	}
-	console.log({ api })
 
 	let jsonBody: string = '';
 	const hasBody: boolean = ['POST', 'UPDATE'].includes(method) && !!body;
 
 	if (['GET', 'DELETE'].includes(method)) {
 		const params = new URLSearchParams({ ...body });
-		api += ('?' + params);
+		if (params && Object.keys(params).length > 0) {
+			api += ('?' + params);
+		}
 	} else if (hasBody) {
 		body = removeEmptyItems(body);
 		jsonBody = JSON.stringify(body);
@@ -54,16 +59,15 @@ http.makeRequest = async function (method: string, api: string, body: object) {
 			mode: 'cors',
 			'Access-Control-Allow-Origin': '*',
 			'Content-Type': 'application/json',
+			...(jwt && { 'Authorization': jwt })
 		},
 		...(hasBody && { body: jsonBody }),
 	}).then(response => {
-		console.log({ response })
     return response.json();
   })
   .catch(error => {
     return error;
   });
-	console.log({ response2: response})
   
   return response;
 };

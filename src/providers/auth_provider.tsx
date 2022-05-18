@@ -19,14 +19,12 @@ type Props = {
 const AuthProvider = ({ children }: Props) => {
 	const [me, setMe] = useState<IMe>({ auth: false });
 
-	useEffect(() => {
-		console.log({ me })
-	}, [me])
-
 	const updateMe = (newMe: IMe) => setMe({ ...newMe, auth: true, });
 
 	const getMe = (email: string, password: string) => {
-		fetchMe().then((response: IMe) => setMe({ ...response, auth: true }));
+		fetchMe().then((response: IMe) => {
+			setMe({ ...response, auth: true });
+		});
 	};
 
 	return (
