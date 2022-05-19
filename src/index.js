@@ -15,42 +15,13 @@ import Users from './routes/users';
 import NewCouple from './routes/new_couple/new_couple';
 import AuthProvider from './providers/auth_provider';
 import Couples from './routes/couples/couples';
+import ProtectedRoute from './routes/protected_route';
 
 ReactDOM.render(
 	<OutingsProvider>
 	<ThemeProvider>
 	<AuthProvider>
-		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<App />}>
-					<Route path="outings" element={<Outings />}>
-						<Route
-							index
-							element={
-								<main style={{ padding: '1rem' }}>
-									<p>Select an outing</p>
-								</main>
-							}
-						/>
-						<Route path=":outingId" element={<OutingsShow />} />
-					</Route>
-					<Route path="swiper" element={<Swiper />} />
-					<Route path="new_outing" element={<NewOuting />} />
-					<Route path="couples" element={<Couples />} />
-					<Route path="new_couple" element={<NewCouple />} />
-					<Route path="new_user" element={<NewUser />} />
-					<Route path="users" element={<Users />} />
-					<Route
-						path="*"
-						element={
-							<main style={{ padding: '1rem' }}>
-								<p>There's nothing here!</p>
-							</main>
-						}
-					/>
-				</Route>
-			</Routes>
-		</BrowserRouter>
+		<App />
 	</AuthProvider>
 	</ThemeProvider>
 	</OutingsProvider>

@@ -1,4 +1,4 @@
-const jwtKey = 'outings_jwt';
+const jwtKey = process.env.REACT_APP_LOCALSTORAGE_AUTH_KEY;
 
 export const getJwt = () => localStorage.getItem(jwtKey);
 
