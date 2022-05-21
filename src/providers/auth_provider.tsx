@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth_context';
 import { fetchMe } from '../data/auth';
 import { destroyJwt, saveJwt } from '../service/jwt';
@@ -25,10 +26,12 @@ type Props = {
 };
 
 const AuthProvider = ({ children }: Props) => {
+	const navigate = useNavigate();
 	const [me, setMe] = useState<IMe>({ auth: false });
 	const logout = () => {
 		destroyJwt();
 		setMe({ auth: false });
+		navigate('/login');
 	}
 
 	const login = ({
