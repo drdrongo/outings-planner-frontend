@@ -1,13 +1,12 @@
 import { CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import {
-	BrowserRouter,
 	Route,
 	Routes,
 } from 'react-router-dom';
 
 import Header from './components/header/header';
-import Sidebar from './components/sidebar/sidebar';
+import Navbar from './components/navbar/navbar';
 import { useAuthContext } from './contexts/auth_context';
 import http from './data/http';
 import Couples from './routes/couples/couples';
@@ -15,14 +14,15 @@ import NewCouple from './routes/new_couple/new_couple';
 import NewOuting from './routes/new_outing/new_outing';
 import Login from './routes/login/login';
 import Home from './routes/home/home';
-import NewUser from './routes/new_user/new_user';
 import OutingsShow from './routes/outing';
 import Outings from './routes/outings';
 import ProtectedRoute from './routes/protected_route';
 import Signup from './routes/signup/signup';
 import Users from './routes/users';
+import { useResponsiveContext } from './contexts/responsive_context';
 
 function App() {
+	const { isMobile, isDesktop } = useResponsiveContext();
 	const [loaded, setLoaded] = useState(false);
 	const { me, updateMe } = useAuthContext();
 
@@ -67,20 +67,17 @@ function App() {
 		<div id="App">
 			{!loaded && <LoadingScreen />}
 
-			<BrowserRouter>
 				<Header />
 				<div id="layout">
-					{me.auth && <Sidebar />}
+					{isDesktop && me.auth && <Navbar />}
 
 					<Routes>
+						{/* Unprotected Routes: */}
 						<Route path="signup" element={<Signup />} />
 						<Route path="login" element={<Login />} />
 						<Route path="/" element={<Home />} />
 
-						{/* Unprotected Routes: */}
-						<Route path="new_user" element={<NewUser />} />
-
-						{/* Protected Route: */}
+						{/* Protected Routes: */}
 						<Route
 							path="new_outing"
 							element={
@@ -161,23 +158,7 @@ function App() {
 							</Route>
 						</Route>
 
-						<Route path="outings" element={<ProtectedRoute me={me} />}>
-							<Route path="swiper" element={<Swiper />} />
-						</Route>
-
-						<Route path="outings" element={<ProtectedRoute me={me} />}>
-							<Route path="couples" element={<Couples />} />
-						</Route>
-
-						<Route path="outings" element={<ProtectedRoute me={me} />}>
-							<Route path="new_couple" element={<NewCouple />} />
-						</Route>
-
-						<Route path="outings" element={<ProtectedRoute me={me} />}>
-							<Route path="users" element={<Users />} />
-						</Route> */}
-
-						{/* <Route
+						<Route
 							path="*"
 							element={
 								<main style={{ padding: '1rem' }}>
@@ -187,7 +168,8 @@ function App() {
 						/> */}
 					</Routes>
 				</div>
-			</BrowserRouter>
+
+				{isMobile && me.auth && <Navbar />}
 		</div>
 	);
 }
