@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Button } from '@mui/material';
 
 import { useThemeContext } from '../../contexts/theme_context';
