@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../contexts/auth_context';
+import { useThemeContext } from '../../contexts/theme_context';
 import http from '../../data/http';
 
 interface ICouple {
@@ -12,6 +13,7 @@ interface ICouple {
 };
 
 export default function Couples() {
+	const { theme } = useThemeContext();
 	const { me } = useAuthContext();
 	const [couples, setCouples] = useState([]);
 
@@ -36,7 +38,9 @@ export default function Couples() {
 	};
 
 	return (
-		<div className="main">
+		<div className="main" style={{
+			...theme,
+		}}>
 			<CouplesList />
 		</div>
 	);

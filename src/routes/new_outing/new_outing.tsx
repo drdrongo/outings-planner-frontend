@@ -4,6 +4,7 @@ import InputField from '../../components/input_field';
 import NumberField from '../../components/number_field';
 import SelectField from '../../components/select_field';
 import { useAuthContext } from '../../contexts/auth_context';
+import { useThemeContext } from '../../contexts/theme_context';
 import http from '../../data/http';
 
 import { saveJwt } from '../../service/jwt';
@@ -29,6 +30,7 @@ type FormData = {
 };
 
 export default function NewOuting() {
+	const { theme } = useThemeContext();
 
 	const { me } = useAuthContext();
 
@@ -83,7 +85,9 @@ export default function NewOuting() {
 	];
 
 	return (
-		<>
+		<div className="main" style={{
+			...theme,
+		}}>
 			<form onSubmit={onSubmit}>
 				{/* <SelectField
 						name="couple_id"
@@ -100,6 +104,6 @@ export default function NewOuting() {
 			</form>
 
 			{/* <button onClick={handleLogin}>Log in?</button> */}
-		</>
+		</div>
 	);
 }

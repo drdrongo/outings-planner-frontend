@@ -2,6 +2,7 @@ import './styles.scss';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import InputField from '../../components/input_field';
+import { useThemeContext } from '../../contexts/theme_context';
 
 type FormData = {
 	f_name: string;
@@ -12,6 +13,7 @@ type FormData = {
 };
 
 export default function NewUser() {
+	const { theme } = useThemeContext();
 	const {
 		handleSubmit,
 		formState: { errors },
@@ -39,13 +41,17 @@ export default function NewUser() {
 	};
 
 	return (
-		<form className="new-user-form">
-			<InputField name="f_name" control={control} label="First Name" defaultValue="" />
-			<InputField name="l_name" control={control} label="Last Name" defaultValue="" />
-			<InputField name="email" control={control} label="Email" defaultValue="" />
-			<InputField name="password" control={control} label="Password" defaultValue="" />
-			<InputField name="password_confirmation" control={control} label="Confirm Password" defaultValue="" />
-			<Button onClick={handleSubmit(onSubmit)}>Submit</Button>
-		</form>
+		<div className="main" style={{
+			...theme,
+		}}>
+			<form className="new-user-form">
+				<InputField name="f_name" control={control} label="First Name" defaultValue="" />
+				<InputField name="l_name" control={control} label="Last Name" defaultValue="" />
+				<InputField name="email" control={control} label="Email" defaultValue="" />
+				<InputField name="password" control={control} label="Password" defaultValue="" />
+				<InputField name="password_confirmation" control={control} label="Confirm Password" defaultValue="" />
+				<Button onClick={handleSubmit(onSubmit)}>Submit</Button>
+			</form>
+		</div>
 	);
 }

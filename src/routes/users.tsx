@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { useThemeContext } from '../contexts/theme_context';
 import http from '../data/http';
 
 interface IUser {
@@ -9,6 +10,7 @@ interface IUser {
 }
 
 const Users = () => {
+	const { theme } = useThemeContext();
 	const [userItems, setUserItems] = useState([]);
 
 	const getUsers = async () => {
@@ -38,7 +40,9 @@ const Users = () => {
 	};
 
 	return (
-		<div>
+		<div className="main" style={{
+			...theme,
+		}}>
 			<Button onClick={handleData}>get user data</Button>
 
 			{Boolean(userItems.length) && userItems}
