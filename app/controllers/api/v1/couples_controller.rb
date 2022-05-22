@@ -12,14 +12,17 @@ class Api::V1::CouplesController < ApplicationController
 
     @me = User.find(couple_params[:user1_id])
 
-    response = Couple.create!(user1: @me, user2: @friend)
-    render json: response
+    response1 = Couple.create!(user1: @me, user2: @friend)
+    response2 = Couple.create!(user1: @friend, user2: @me)
+    render json: { response1: response1, response2: response2 }
   end
 
-  def show
-    params[:id] && @couple = Couple.find(params[:id])
+  def get_partner
+    params[:user1_id] && @couple = Couple.find_by(user1_id: params[:user1_id])
+
     if @couple
-      render json: @couple, status: 200
+      partner = User.find(@couple.user2_id)
+      render json: { couple: @couple, partner: partner }, status: 200
     else
       render json: { errors: @couple.errors.full_messages }, status: 422
     end

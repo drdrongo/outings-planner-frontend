@@ -11,11 +11,12 @@ Rails.application.routes.draw do
       resources :spots
       resources :outings
       # namespace :outings do
-        post 'outings/toggle_favorite', action: :toggle_favorite, controller: 'outings'
+      post 'outings/toggle_favorite', action: :toggle_favorite, controller: 'outings'
       # end
 
       resources :outing_reviews
-      resources :couples
+      resources :couples, except: [:show]
+      get 'couples/get_partner', action: :get_partner, controller: 'couples'
     end
   end
 end
