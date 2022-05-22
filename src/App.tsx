@@ -1,9 +1,6 @@
 import { CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
-import {
-	Route,
-	Routes,
-} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Header from './components/header/header';
 import Navbar from './components/navbar/navbar';
@@ -20,6 +17,7 @@ import ProtectedRoute from './routes/protected_route';
 import Signup from './routes/signup/signup';
 import Users from './routes/users';
 import { useResponsiveContext } from './contexts/responsive_context';
+import MyCouple from './routes/my_couple/my_couple';
 
 function App() {
 	const { isMobile, isDesktop } = useResponsiveContext();
@@ -67,83 +65,86 @@ function App() {
 		<div id="App">
 			{!loaded && <LoadingScreen />}
 
-				<Header />
-				<div id="layout">
-					{isDesktop && me.auth && <Navbar />}
+			<Header />
+			<div id="layout">
+				{isDesktop && me.auth && <Navbar />}
 
-					<Routes>
-						{/* Unprotected Routes: */}
-						<Route path="signup" element={<Signup />} />
-						<Route path="login" element={<Login />} />
-						<Route path="/" element={<Home />} />
+				<Routes>
+					{/* Unprotected Routes: */}
+					<Route path="signup" element={<Signup />} />
+					<Route path="login" element={<Login />} />
+					<Route path="/" element={<Home />} />
+					{/* Protected Routes: */}
+					<Route
+						path="new_outing"
+						element={
+							<ProtectedRoute me={me}>
+								<NewOuting />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="my_couple"
+						element={
+							<ProtectedRoute me={me}>
+								<MyCouple />
+							</ProtectedRoute>
+						}
+					/>
 
-						{/* Protected Routes: */}
+					<Route
+						path="outings"
+						element={
+							<ProtectedRoute me={me}>
+								<Outings />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="outings/:outingId"
+						element={
+							<ProtectedRoute me={me}>
+								<OutingsShow />
+							</ProtectedRoute>
+						}
+					></Route>
+					{/* <Route path=":outingId" element={<OutingsShow />} /> */}
+					<Route path="outings" element={<Outings />}>
 						<Route
-							path="new_outing"
+							index
 							element={
-								<ProtectedRoute me={me}>
-									<NewOuting />
-								</ProtectedRoute>
+								<main style={{ padding: '1rem' }}>
+									<p>Select an outing</p>
+								</main>
 							}
 						/>
-
-						<Route
-							path="outings"
-							element={
-								<ProtectedRoute me={me}>
-									<Outings />
-								</ProtectedRoute>
-							}
-						/>
-						<Route
-							path="outings/:outingId"
-							element={
-								<ProtectedRoute me={me}>
-									<OutingsShow />
-								</ProtectedRoute>
-							}
-						></Route>
-						{/* <Route path=":outingId" element={<OutingsShow />} /> */}
-
-						<Route path="outings" element={<Outings />}>
-							<Route
-								index
-								element={
-									<main style={{ padding: '1rem' }}>
-										<p>Select an outing</p>
-									</main>
-								}
-							/>
-							<Route path=":outingId" element={<OutingsShow />} />
-						</Route>
-
-						<Route
-							path="users"
-							element={
-								<ProtectedRoute me={me}>
-									<Users />
-								</ProtectedRoute>
-							}
-						/>
-						<Route
-							path="new_couple"
-							element={
-								<ProtectedRoute me={me}>
-									<NewCouple />
-								</ProtectedRoute>
-							}
-						/>
-
-						<Route
-							path="couples"
-							element={
-								<ProtectedRoute me={me}>
-									<Couples />
-								</ProtectedRoute>
-							}
-						/>
-
-						{/* 
+						<Route path=":outingId" element={<OutingsShow />} />
+					</Route>
+					<Route
+						path="users"
+						element={
+							<ProtectedRoute me={me}>
+								<Users />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="new_couple"
+						element={
+							<ProtectedRoute me={me}>
+								<NewCouple />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="couples"
+						element={
+							<ProtectedRoute me={me}>
+								<Couples />
+							</ProtectedRoute>
+						}
+					/>
+					{/* 
 						<Route path="outings" element={<ProtectedRoute me={me} />}>
 							<Route path="outings" element={<Outings />}>
 								<Route
@@ -166,10 +167,10 @@ function App() {
 								</main>
 							}
 						/> */}
-					</Routes>
-				</div>
+				</Routes>
+			</div>
 
-				{isMobile && me.auth && <Navbar />}
+			{isMobile && me.auth && <Navbar />}
 		</div>
 	);
 }
