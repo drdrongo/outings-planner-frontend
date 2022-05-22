@@ -2,22 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/auth_context';
 import { fetchMe } from '../data/auth';
+import { IUser } from '../data/users';
 import { destroyJwt, saveJwt } from '../service/jwt';
 
-interface IMe {
-	auth: boolean;
-	id?: number;
-	f_name?: string;
-	l_name?: string;
-	email?: string;
-	image?: string;
-	birthday?: number;
-	created_at?: string;
-	updated_at?: string;
-}
 
 interface ILoginProps {
-	user: IMe;
+	user: IUser;
 	token: string;
 }
 
@@ -27,7 +17,7 @@ type Props = {
 
 const AuthProvider = ({ children }: Props) => {
 	const navigate = useNavigate();
-	const [me, setMe] = useState<IMe>({ auth: false });
+	const [me, setMe] = useState<IUser>({ auth: false });
 	const logout = () => {
 		destroyJwt();
 		setMe({ auth: false });
@@ -42,10 +32,10 @@ const AuthProvider = ({ children }: Props) => {
 		setMe({ ...user, auth: true, });
 	}
 
-	const updateMe = (newMe: IMe) => setMe({ ...newMe, auth: true, });
+	const updateMe = (newMe: IUser) => setMe({ ...newMe, auth: true, });
 
 	const getMe = () => {
-		fetchMe().then((response: IMe) => {
+		fetchMe().then((response: IUser) => {
 			console.log({ response })
 			setMe({ ...response, auth: true });
 		});

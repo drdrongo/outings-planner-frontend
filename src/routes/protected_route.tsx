@@ -1,9 +1,9 @@
 import { ReactElement } from "react";
 import { Navigate } from "react-router-dom";
-import { IMe } from "../data/auth";
+import { IUser } from "../data/users";
 
 interface IProps {
-  me: IMe;
+  me: IUser;
   children: ReactElement | null;
 }
 

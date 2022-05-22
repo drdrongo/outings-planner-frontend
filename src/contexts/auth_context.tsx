@@ -1,8 +1,8 @@
 import { createContext, useContext, } from 'react';
-import { IMe } from '../data/auth';
+import { IUser } from '../data/users';
 
 type GlobalAuth = {
-  me: IMe;
+  me: IUser;
   getMe: Function;
   updateMe: Function;
   logout: Function;
