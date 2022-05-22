@@ -7,17 +7,20 @@ import ThemeProvider from './providers/theme_provider';
 import OutingsProvider from './providers/outings_provider';
 import AuthProvider from './providers/auth_provider';
 import { BrowserRouter } from 'react-router-dom';
+import CouplesProvider from './providers/couples_provider';
 
 ReactDOM.render(
 	<BrowserRouter>
 		<ResponsiveProvider>
-			<OutingsProvider>
-				<ThemeProvider>
-					<AuthProvider>
-						<App />
-					</AuthProvider>
-				</ThemeProvider>
-			</OutingsProvider>
+			<ThemeProvider>
+				<AuthProvider>
+					<CouplesProvider>
+						<OutingsProvider>
+							<App />
+						</OutingsProvider>
+					</CouplesProvider>
+				</AuthProvider>
+			</ThemeProvider>
 		</ResponsiveProvider>
 	</BrowserRouter>,
 	document.getElementById('root')

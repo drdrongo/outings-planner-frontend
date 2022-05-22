@@ -40,7 +40,7 @@ const OutingsList = ({ outings }: OutingsListProps) => {
 	return (
 		<>
 			{outings.map(ot => {
-				return <OutingItem outing={ot} />;
+				return <OutingItem key={ot.id} outing={ot} />;
 			})}
 		</>
 	);
