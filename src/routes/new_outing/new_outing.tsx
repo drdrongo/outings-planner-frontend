@@ -1,13 +1,15 @@
+import './styles.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import InputField from '../../components/input_field';
 import NumberField from '../../components/number_field';
-import SelectField from '../../components/select_field';
+// import SelectField from '../../components/select_field';
 import { useAuthContext } from '../../contexts/auth_context';
 import { useThemeContext } from '../../contexts/theme_context';
 import http from '../../data/http';
-
-import { saveJwt } from '../../service/jwt';
+import { Button } from '@mui/material';
+import { useCouplesContext } from '../../contexts/couples_context';
+import PageLayout from '../../components/page_layout/page_layout';
 
 // Outing type information:
 // id: number;
@@ -23,7 +25,7 @@ import { saveJwt } from '../../service/jwt';
 // rating: number;
 
 type FormData = {
-	couple_id: number;
+	// couple_id: number;
 	title: string;
 	description: string;
 	price: number;
@@ -31,64 +33,55 @@ type FormData = {
 
 export default function NewOuting() {
 	const { theme } = useThemeContext();
+	const { myCouple } = useCouplesContext();
 
 	const { me } = useAuthContext();
 
 	const {
-		register,
 		control,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<FormData>();
 
 	const onSubmit = handleSubmit(async data => {
-		const body = JSON.stringify({
-			outing: data
-		});
-		const url = 'http://localhost:3000/api/v1/outings';
-		const response = await fetch(url, {
-			method: 'POST', // *GET, POST, PUT, DELETE, etc.
-			mode: 'cors', // no-cors, *cors, same-origin
-			cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-			credentials: 'same-origin', // include, *same-origin, omit
-			headers: {
-				'Content-Type': 'application/json',
-				// 'Content-Type': 'application/x-www-form-urlencoded',
+		const body = {
+			outing: {
+				...data,
+				couple_id: myCouple.id,
 			},
-			redirect: 'follow', // manual, *follow, error
-			referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-			body, // body data type must match "Content-Type" header
-		});
-		const r = await response.json(); // parses JSON response into native JavaScript objects
-		console.log(r)
-		return r;
+		};
+		const response = await http.post('/api/v1/outings', body);
+		console.log({ responseFromNewOuting: response });
+		return response;
 	});
 
 	const [couples, setCouples] = useState([]);
-	
+
 	const fetchCouples = useCallback(async () => {
 		if (!me.id) return;
 
-		const myCouples = await http.get('/api/v1/couples', { user_id: +me.id });
-		console.log({ myCouples })
+		const myCouples = await http.get('/api/v1/couples', {
+			user_id: +me.id,
+		});
+		console.log({ myCouples });
 		setCouples(myCouples);
 	}, [me.id]);
 
 	useEffect(() => {
 		fetchCouples();
-	}, [fetchCouples])
+	}, [fetchCouples]);
 
-	const selectOptions : { optVal: any, optLab: string }[] = [
-		{ optVal: 1, optLab: 'One'},
-		{ optVal: 2, optLab: 'Two'},
-		{ optVal: 3, optLab: 'Three'},
+	const selectOptions: { optVal: any; optLab: string }[] = [
+		{ optVal: 1, optLab: 'One' },
+		{ optVal: 2, optLab: 'Two' },
+		{ optVal: 3, optLab: 'Three' },
 	];
 
+	if (!myCouple.id) return <PageLayout></PageLayout>;
+
 	return (
-		<div className="main" style={{
-			...theme,
-		}}>
-			<form onSubmit={onSubmit}>
+		<PageLayout id="new-outing-page">
+			<form id="new-outing-form">
 				{/* <SelectField
 						name="couple_id"
 						control={control}
@@ -96,14 +89,32 @@ export default function NewOuting() {
 						options={selectOptions}
 						defaultValue={selectOptions[0].optVal}
 				/> */}
-				<NumberField name="couple_id" control={control} label="Couple ID" defaultValue=""/>
-				<InputField name="title" control={control} label="Title" defaultValue="" />
-				<InputField name="description" control={control} label="Description" defaultValue="" />
-				<InputField name="price" control={control} label="Price" defaultValue="" />
-				<input type="submit" />
+				{/* <NumberField
+					name="couple_id"
+					control={control}
+					label="Couple ID"
+					defaultValue=""
+				/> */}
+				<InputField
+					name="title"
+					control={control}
+					label="Title"
+					defaultValue=""
+				/>
+				<InputField
+					name="description"
+					control={control}
+					label="Description"
+					defaultValue=""
+				/>
+				<InputField
+					name="price"
+					control={control}
+					label="Price"
+					defaultValue=""
+				/>
+				<Button onClick={onSubmit}>Create Outing</Button>
 			</form>
-
-			{/* <button onClick={handleLogin}>Log in?</button> */}
-		</div>
+		</PageLayout>
 	);
 }

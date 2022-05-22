@@ -1,0 +1,18 @@
+#new-outing-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  #new-outing-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .MuiFormControl-root {
+      background-color: white;
+      margin: 0.1rem 1rem;
+    }
+    button {
+    }
+  }
+}
