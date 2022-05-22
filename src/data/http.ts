@@ -41,15 +41,17 @@ http.makeRequest = async function (method: string, api: string, body: object) {
 	}
 
 	let jsonBody: string = '';
+	body = removeEmptyItems(body);
 	const hasBody: boolean = ['POST', 'UPDATE'].includes(method) && !!body;
 
 	if (['GET', 'DELETE'].includes(method)) {
-		const params = new URLSearchParams({ ...body });
-		if (params && Object.keys(params).length > 0) {
-			api += ('?' + params);
+		if (Object.keys(body).length > 0) {
+			const params = new URLSearchParams({ ...body });
+			if (params) {
+				api += ('?' + params);
+			}
 		}
 	} else if (hasBody) {
-		body = removeEmptyItems(body);
 		jsonBody = JSON.stringify(body);
 	}
 
