@@ -3,10 +3,10 @@ import {
 	Outlet,
 	useSearchParams,
 } from 'react-router-dom';
-import OutingsList from '../components/outings_list';
-import { useOutingsContext } from '../contexts/outings_context';
-import { useThemeContext } from '../contexts/theme_context';
-import http from '../data/http';
+import OutingsList from '../../components/outings_list/outings_list';
+import { useOutingsContext } from '../../contexts/outings_context';
+import { useThemeContext } from '../../contexts/theme_context';
+import http from '../../data/http';
 
 export default function Outings() {
 	let [searchParams, setSearchParams] = useSearchParams(); // works like setState, but stores data in the search params instead

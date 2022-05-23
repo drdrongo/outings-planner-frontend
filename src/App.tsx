@@ -12,7 +12,7 @@ import NewOuting from './routes/new_outing/new_outing';
 import Login from './routes/login/login';
 import Home from './routes/home/home';
 import OutingsShow from './routes/outing';
-import Outings from './routes/outings';
+import Outings from './routes/outings/outings';
 import ProtectedRoute from './routes/protected_route';
 import Signup from './routes/signup/signup';
 import Users from './routes/users';

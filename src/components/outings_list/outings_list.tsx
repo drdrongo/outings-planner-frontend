@@ -1,4 +1,5 @@
-import { Outing } from '../data/outings';
+import './styles.scss';
+import { Outing } from '../../data/outings';
 import {
 	NavLink,
 	useLocation,
@@ -7,7 +8,7 @@ import {
 
 function QueryNavLink({ to = '', ...props }: NavLinkProps) {
 	const location = useLocation();
-	return <NavLink to={to + location.search} {...props}/>;
+	return <NavLink className="outing-item" to={to + location.search} {...props}/>;
 }
 
 interface OutingItemProps {
@@ -17,13 +18,6 @@ interface OutingItemProps {
 const OutingItem = ({ outing }: OutingItemProps) => {
 	return (
 		<QueryNavLink // lets us show that this current link is acative or inactive.
-			style={({ isActive = false }) => {
-				return {
-					display: 'block',
-					margin: '1rem 0',
-					color: isActive ? 'red' : '',
-				};
-			}}
 			to={`/outings/${outing.id}`}
 			key={outing.id}
 		>

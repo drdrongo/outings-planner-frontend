@@ -1,7 +1,28 @@
+import './styles.scss';
+import OutingsList from "../../components/outings_list/outings_list";
+import { useAuthContext } from "../../contexts/auth_context";
+import { useOutingsContext } from "../../contexts/outings_context";
 import { useThemeContext } from "../../contexts/theme_context";
+
+const AuthHome = () => {
+	const { outings } = useOutingsContext();
+
+	return <div id="home-inner">
+		<h1>Top Outings</h1>
+		<OutingsList outings={outings}/>
+	</div>
+}
 
 const Home = () => {
   const { theme } = useThemeContext();
+	const { me } = useAuthContext();
+
+	const UnAuthHome = () => (
+		<div id="home-inner">
+			<h1>Erica and Hayato's Outing Planner</h1>
+		</div>
+	)
+
   return (
 		<div
 			className="main"
@@ -10,7 +31,11 @@ const Home = () => {
 				...theme,
 			}}
 		>
-      Home
+			{me.auth ? (
+				<AuthHome />
+			) : (
+				<UnAuthHome />
+			)}
     </div>
   )
 }
