@@ -1,4 +1,5 @@
-import { TextField } from '@mui/material';
+import './styles.scss';
+import { Slider, TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 
 interface NumberFieldProps {
@@ -14,8 +15,7 @@ const NumberField = ({
 	control,
 	rules = {},
 	label,
-	defaultValue = '',
-	autoComplete = '',
+	defaultValue = 0,
 }: NumberFieldProps) => {
 	return (
 		<Controller
@@ -24,24 +24,22 @@ const NumberField = ({
 			defaultValue={defaultValue}
 			rules={rules}
 			render={({ field: { onChange, value }, fieldState: { error } }) => (
-				<TextField
-					label={label}
-					variant="filled"
-					value={value}
-					onChange={onChange}
-					type="number"
-					error={!!error}
-					helperText={error ? error.message : null}
-					autoComplete={autoComplete}
-					inputProps={{
-						autoComplete: autoComplete,
-						form: {
-							autoComplete: 'off', // Stops field auto-fill for this form??
-						},
-						inputMode: 'numeric',
-						pattern: '[0-9]*',
-					}}
-				/>
+				<>
+					{label.length > 0 && <label className="slider-label">{label}</label>}
+					<Slider
+						onChange={onChange}
+						defaultValue={defaultValue}
+						valueLabelDisplay="auto"
+						step={1}
+						marks
+						min={1}
+						max={5}
+						style={{
+							maxWidth: '26rem',
+							margin: '0 auto'
+						}}
+					/>
+				</>
 			)}
 		/>
 	);

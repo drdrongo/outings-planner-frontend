@@ -3,11 +3,10 @@ import { useThemeContext } from '../../contexts/theme_context';
 
 interface IProps {
 	children?: React.ReactNode;
-	// rest?: any;
 	[x:string]: any;
 }
 
-const PageLayout = ({ children, rest={} }: IProps) => {
+const PageLayout = ({ children, ...rest }: IProps) => {
 	const { theme } = useThemeContext();
 
 	return (

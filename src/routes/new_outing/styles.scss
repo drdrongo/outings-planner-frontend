@@ -4,15 +4,24 @@
   justify-content: center;
 
   #new-outing-form {
-    width: 100%;
+    background-color: white;
     display: flex;
     flex-direction: column;
+    max-width: 32rem;
+    width: 100%;
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+    border: 1px solid black;
 
-    .MuiFormControl-root {
-      background-color: white;
-      margin: 0.1rem 1rem;
+    .MuiInputBase-root {
+      margin-bottom: 1rem;
     }
-    button {
-    }
+
+    // .MuiFormControl-root {
+    //   background-color: white;
+    //   margin: 0.1rem 1rem;
+    // }
+    // button {
+    // }
   }
 }
