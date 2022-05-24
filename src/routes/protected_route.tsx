@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const ProtectedRoute = ({ me, children }: IProps) => {
-  return me.auth ? children : <Navigate to="/" />;
+  return me.auth ? children : <Navigate to="/"  />;
 };
 
 export default ProtectedRoute;
