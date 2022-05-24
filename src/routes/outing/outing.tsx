@@ -80,6 +80,8 @@ export default function OutingsShow() {
         {[...Array(mood)].map((_star, idx) => (
           <Star key={idx} />
         ))}
+
+        
         
         <p>Price:</p>
         {[...Array(price)].map((_yen, idx) => (

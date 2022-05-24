@@ -14,7 +14,7 @@ const Header = () => {
 
 	return (
 		<header
-			className="app-header"
+			id="app-header"
 			style={{
 				...theme,
 				borderBottomWidth: '1px',
