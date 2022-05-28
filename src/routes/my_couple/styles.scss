@@ -1,0 +1,72 @@
+#MyCouple {
+  display: flex;
+  flex-direction: column;
+
+  .info-section {
+    padding-top: 4rem;
+    background-color: white;
+    position: relative;
+
+
+    .avatars {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .MuiAvatar-root {
+        border: 1px solid blue;
+        background-color: white;
+
+        &:first-child {
+          margin-right: -3%;
+        }
+
+        &:last-child {
+          margin-left: -3%;
+        }
+      }
+    }
+
+    h1 {
+      text-align: center;
+      color: black;
+    }
+
+    .quick-stats {
+      display: flex;
+      justify-content: space-evenly;
+
+      .stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        color: black;
+      }
+    }
+
+    .round-edge {
+      height: 6rem;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin-top: -1px;
+
+      div {
+        background-color: white;
+        height: 15rem;
+        width: 120%;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border-bottom-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+        z-index: 0;
+      }
+
+    }
+  }
+
+
+}
