@@ -71,11 +71,9 @@ export default function NewOuting() {
 		fetchCouples();
 	}, [fetchCouples]);
 
-	const selectOptions: { optVal: any; optLab: string }[] = [
-		{ optVal: 1, optLab: 'One' },
-		{ optVal: 2, optLab: 'Two' },
-		{ optVal: 3, optLab: 'Three' },
-	];
+	const genres: { val: any; lab: string }[] | [] = process?.env?.REACT_APP_CATEGORIES
+		?.split(',')
+		.map(act => ({ val: act, lab: act })) || [];
 
 	if (!myCouple.id) return <PageLayout></PageLayout>;
 
@@ -116,12 +114,7 @@ export default function NewOuting() {
 					control={control}
 					label="Genre"
 					defaultValue=""
-					options={[
-						{ lab: 'Genre', val: '' },
-						{ lab: 'Fun', val: 'fun' },
-						{ lab: 'Sad', val: 'sad' },
-						{ lab: 'Gum', val: 'gum' }
-					]}
+					options={genres}
 				/>
 
 
