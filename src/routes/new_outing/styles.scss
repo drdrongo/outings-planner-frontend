@@ -1,3 +1,7 @@
+:root {
+  --mood-value: url('../../assets/images/mood-face-3.png');
+}
+
 #new-outing-page {
   display: flex;
   align-items: center;
@@ -16,6 +20,17 @@
     .MuiInputBase-root {
       margin-bottom: 1rem;
     }
+
+    #mood-slider {
+      span.MuiSlider-thumb {
+        &::before {
+          background-image: var(--mood-value);
+          background-size: contain;
+          background-color: white ;
+        }
+      }
+    }
+
 
     // .MuiFormControl-root {
     //   background-color: white;

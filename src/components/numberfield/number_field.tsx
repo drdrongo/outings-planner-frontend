@@ -3,19 +3,23 @@ import { Slider, TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 
 interface NumberFieldProps {
+	id?: string | undefined;
 	name: string;
 	control: FormData | any;
 	rules?: object | undefined;
 	label: string;
 	defaultValue: any | undefined;
 	autoComplete?: string | undefined;
+	handleChange?: Function | undefined;
 }
 const NumberField = ({
+	id,
 	name,
 	control,
 	rules = {},
 	label,
 	defaultValue = 0,
+	handleChange,
 }: NumberFieldProps) => {
 	return (
 		<Controller
@@ -27,7 +31,11 @@ const NumberField = ({
 				<>
 					{label.length > 0 && <label className="slider-label">{label}</label>}
 					<Slider
-						onChange={onChange}
+						id={id || undefined}
+						onChange={e => {
+							onChange(e);
+							handleChange && handleChange(e);
+						}}
 						defaultValue={defaultValue}
 						valueLabelDisplay="auto"
 						step={1}

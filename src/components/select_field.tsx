@@ -7,6 +7,7 @@ interface ISelectOpt {
 }
 
 interface SelectFieldProps {
+	id?: string | undefined;
 	name: string;
 	control: FormData | any;
 	label: string;
@@ -14,6 +15,7 @@ interface SelectFieldProps {
 	options: ISelectOpt[];
 }
 const SelectField = ({
+	id,
 	name,
 	control,
 	label,
@@ -27,7 +29,7 @@ const SelectField = ({
 			control={control}
 			
 			render={({ field: { onChange, value }, fieldState: { error } }) => (
-				<FormControl style={{ marginTop: '1rem' }} >
+				<FormControl style={{ marginTop: '1rem' }} id={id || undefined}>
 					<InputLabel id={`${label}-select-label`}>{label}</InputLabel>
 					<Select
 						labelId={`${label}-select-label`}

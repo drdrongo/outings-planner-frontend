@@ -1,13 +1,13 @@
 import './styles.scss';
 import { useCallback, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import InputField from '../../components/input_field';
 import NumberField from '../../components/numberfield/number_field';
 // import SelectField from '../../components/select_field';
 import { useAuthContext } from '../../contexts/auth_context';
 import { useThemeContext } from '../../contexts/theme_context';
 import http from '../../data/http';
-import { Button, FormControl, MenuItem, Select } from '@mui/material';
+import { Button, FormControl, MenuItem, Select, Slider } from '@mui/material';
 import { useCouplesContext } from '../../contexts/couples_context';
 import PageLayout from '../../components/page_layout/page_layout';
 import SelectField from '../../components/select_field';
@@ -30,6 +30,7 @@ type FormData = {
 	title: string;
 	description: string;
 	price: number;
+	mood: number;
 };
 
 export default function NewOuting() {
@@ -71,9 +72,15 @@ export default function NewOuting() {
 		fetchCouples();
 	}, [fetchCouples]);
 
-	const genres: { val: any; lab: string }[] | [] = process?.env?.REACT_APP_CATEGORIES
-		?.split(',')
-		.map(act => ({ val: act, lab: act })) || [];
+	const [moodVal, setMoodVal] = useState(3);
+	const [priceVal, setPriceVal] = useState(3);
+
+	const genres: { val: any; lab: string }[] | [] =
+		process?.env?.REACT_APP_CATEGORIES?.split(',').map(act => ({
+			key: act,
+			val: act,
+			lab: act,
+		})) || [];
 
 	if (!myCouple.id) return <PageLayout></PageLayout>;
 
@@ -100,13 +107,45 @@ export default function NewOuting() {
 					control={control}
 					label="Price"
 					defaultValue={0}
+					handleChange={(e: any) => {
+						if (e.target.value !== moodVal) {
+							setPriceVal(e.target.value);
+						}
+					}}
 				/>
 
-				<NumberField
+				<Controller
 					name="mood"
 					control={control}
-					label="Mood"
-					defaultValue={0}
+					defaultValue={3}
+					render={({
+						field: { onChange, value },
+						fieldState: { error },
+					}) => (
+						<>
+							<label className="slider-label">Mood</label>
+							<Slider
+								id="mood-slider"
+								onChange={(e: Event,value: number | number[]) => {
+									const val = Array.isArray(value) ? value[0] : value;
+									if (val !== moodVal) {
+										setMoodVal(val);
+										document.documentElement.style.setProperty('--mood-value', `url('..\/..\/assets\/images\/mood-face-${val}.png')`);
+									}
+								}}
+								valueLabelDisplay="auto"
+								step={1}
+								defaultValue={3}
+								marks
+								min={1}
+								max={5}
+								style={{
+									maxWidth: '26rem',
+									margin: '0 auto',
+								}}
+							/>
+						</>
+					)}
 				/>
 
 				<SelectField
@@ -117,13 +156,11 @@ export default function NewOuting() {
 					options={genres}
 				/>
 
-
 				<Button type="submit">Create Outing</Button>
 			</form>
 		</PageLayout>
 	);
 }
-
 
 // attend_on: null
 // couple_id: 4
