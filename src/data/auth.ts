@@ -3,7 +3,7 @@ import { IUser } from './users';
 
 export const fetchMe: Function = async () => {
 	const me: IUser = await http.get('http://localhost:3001/api/v1/auth', {
-		email: 'hayatoclarke@gmail.com',
+		email: 'hayato@gmail.com',
 		password: 'foobar',
 	});
 

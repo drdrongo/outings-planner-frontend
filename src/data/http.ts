@@ -45,11 +45,17 @@ http.makeRequest = async function (method: string, api: string, body: object) {
 	const hasBody: boolean = ['POST', 'UPDATE'].includes(method) && !!body;
 
 	if (['GET', 'DELETE'].includes(method)) {
+		console.log('asshole');
 		if (Object.keys(body).length > 0) {
+		console.log('bums1');
+
 			const params = new URLSearchParams({ ...body });
+		console.log({params});
+
 			if (params) {
 				api += ('?' + params);
 			}
+			console.log({ api })
 		}
 	} else if (hasBody) {
 		jsonBody = JSON.stringify(body);

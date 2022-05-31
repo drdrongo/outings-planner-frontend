@@ -24,10 +24,7 @@ const AuthProvider = ({ children }: Props) => {
 		navigate('/login');
 	}
 
-	const login = ({
-		user,
-		token
-	}: ILoginProps) => {
+	const login = ({ user, token }: ILoginProps) => {
 		saveJwt(token);
 		setMe({ ...user, auth: true, });
 	}

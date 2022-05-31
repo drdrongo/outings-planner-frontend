@@ -2,15 +2,14 @@ import './styles.scss';
 import { useCallback, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import InputField from '../../components/input_field';
-import NumberField from '../../components/numberfield/number_field';
-// import SelectField from '../../components/select_field';
 import { useAuthContext } from '../../contexts/auth_context';
 import { useThemeContext } from '../../contexts/theme_context';
 import http from '../../data/http';
-import { Button, FormControl, MenuItem, Select, Slider } from '@mui/material';
+import { Button, ButtonBase, Slider, TextField } from '@mui/material';
 import { useCouplesContext } from '../../contexts/couples_context';
 import PageLayout from '../../components/page_layout/page_layout';
 import SelectField from '../../components/select_field';
+import { Link } from 'react-router-dom';
 
 // Outing type information:
 // id: number;
@@ -26,7 +25,6 @@ import SelectField from '../../components/select_field';
 // rating: number;
 
 type FormData = {
-	// couple_id: number;
 	title: string;
 	description: string;
 	price: number;
@@ -36,12 +34,14 @@ type FormData = {
 export default function NewOuting() {
 	const { theme } = useThemeContext();
 	const { myCouple } = useCouplesContext();
-
 	const { me } = useAuthContext();
+
+	const [newOutingId, setNewOutingId] = useState(0);
 
 	const {
 		control,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm<FormData>();
 
@@ -53,6 +53,10 @@ export default function NewOuting() {
 			},
 		};
 		const response = await http.post('/api/v1/outings', body);
+		if (response?.id) {
+			setNewOutingId(response.id);
+			reset();
+		}
 		console.log({ responseFromNewOuting: response });
 		return response;
 	});
@@ -73,7 +77,14 @@ export default function NewOuting() {
 	}, [fetchCouples]);
 
 	const [moodVal, setMoodVal] = useState(3);
-	const [priceVal, setPriceVal] = useState(3);
+	const priceMarks = [
+		{ value: 1, label: '$' },
+		{ value: 2, label: '' },
+		{ value: 3, label: '$$$' },
+		{ value: 4, label: '' },
+		{ value: 5, label: '$$$$$' },
+	];
+	
 
 	const genres: { val: any; lab: string }[] | [] =
 		process?.env?.REACT_APP_CATEGORIES?.split(',').map(act => ({
@@ -94,24 +105,49 @@ export default function NewOuting() {
 					defaultValue=""
 					rules={{ required: 'Required' }}
 				/>
-				<InputField
+				<Controller
 					name="description"
 					control={control}
-					label="Description"
 					defaultValue=""
-					rules={{ required: 'Required' }}
+					render={({ field: { onChange, value }, fieldState: { error } }) => (
+						<TextField
+							label="Description"
+							variant="filled"
+							value={value}
+							onChange={onChange}
+							error={!!error}
+							multiline={true}
+							helperText={error ? error.message : null}
+						/>
+					)}
 				/>
 
-				<NumberField
+				<Controller
 					name="price"
 					control={control}
-					label="Price"
-					defaultValue={0}
-					handleChange={(e: any) => {
-						if (e.target.value !== moodVal) {
-							setPriceVal(e.target.value);
-						}
-					}}
+					defaultValue={3}
+					render={({
+						field: { onChange, value },
+						fieldState: { error },
+					}) => (
+						<>
+							<label className="slider-label" style={{ marginTop: '1rem' }}>Price</label>
+							<Slider
+								id="price-slider"
+								onChange={onChange}
+								valueLabelDisplay="auto"
+								step={1}
+								defaultValue={3}
+								marks={priceMarks}
+								min={1}
+								max={5}
+								style={{
+									maxWidth: '26rem',
+									margin: '0 auto 3rem',
+								}}
+							/>
+						</>
+					)}
 				/>
 
 				<Controller
@@ -126,7 +162,8 @@ export default function NewOuting() {
 							<label className="slider-label">Mood</label>
 							<Slider
 								id="mood-slider"
-								onChange={(e: Event,value: number | number[]) => {
+								onChange={(e: Event, value: number | number[]) => {
+									onChange();
 									const val = Array.isArray(value) ? value[0] : value;
 									if (val !== moodVal) {
 										setMoodVal(val);
@@ -152,12 +189,20 @@ export default function NewOuting() {
 					name="genre"
 					control={control}
 					label="Genre"
-					defaultValue=""
+					defaultValue={genres[3].lab}
 					options={genres}
 				/>
 
 				<Button type="submit">Create Outing</Button>
 			</form>
+
+			{Boolean(newOutingId) && (
+				<div>
+					<Link to={`/outings/${newOutingId}`}>
+						Go to outing
+					</Link>
+				</div>
+			)}
 		</PageLayout>
 	);
 }

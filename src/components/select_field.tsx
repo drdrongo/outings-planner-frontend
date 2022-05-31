@@ -38,7 +38,7 @@ const SelectField = ({
 						onChange={onChange}
 					>
 						{options.map(({ lab, val }) => (
-							<MenuItem value={val}>{lab}</MenuItem>
+							<MenuItem key={val} value={val}>{lab}</MenuItem>
 						))}
 					</Select>
 				</FormControl>

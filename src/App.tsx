@@ -27,15 +27,15 @@ function App() {
 	const initializeMe = async () => {
 		const response = await http.get('/auth/verify_jwt');
 		if (response.errors) {
-			console.error(response.errors);
 			setLoaded(true);
 			return;
 		}
-		console.log({ responseO: response });
 		if (response) {
+			console.log('updating me')
 			updateMe(response);
 		} else {
 		}
+		console.log('setting to loaded')
 		setLoaded(true);
 	};
 
@@ -78,7 +78,7 @@ function App() {
 					<Route
 						path="new_outing"
 						element={
-							<ProtectedRoute me={me}>
+							<ProtectedRoute me={me} loaded={loaded}>
 								<NewOuting />
 							</ProtectedRoute>
 						}
@@ -86,7 +86,7 @@ function App() {
 					<Route
 						path="my_couple"
 						element={
-							<ProtectedRoute me={me}>
+							<ProtectedRoute me={me} loaded={loaded}>
 								<MyCouple />
 							</ProtectedRoute>
 						}
@@ -95,7 +95,7 @@ function App() {
 					<Route
 						path="outings"
 						element={
-							<ProtectedRoute me={me}>
+							<ProtectedRoute me={me} loaded={loaded}>
 								<Outings />
 							</ProtectedRoute>
 						}
@@ -103,7 +103,7 @@ function App() {
 					<Route
 						path="outings/:outingId"
 						element={
-							<ProtectedRoute me={me}>
+							<ProtectedRoute me={me} loaded={loaded}>
 								<OutingsShow />
 							</ProtectedRoute>
 						}
@@ -123,7 +123,7 @@ function App() {
 					<Route
 						path="users"
 						element={
-							<ProtectedRoute me={me}>
+							<ProtectedRoute me={me} loaded={loaded}>
 								<Users />
 							</ProtectedRoute>
 						}
@@ -131,7 +131,7 @@ function App() {
 					<Route
 						path="new_couple"
 						element={
-							<ProtectedRoute me={me}>
+							<ProtectedRoute me={me} loaded={loaded}>
 								<NewCouple />
 							</ProtectedRoute>
 						}
@@ -139,13 +139,13 @@ function App() {
 					<Route
 						path="couples"
 						element={
-							<ProtectedRoute me={me}>
+							<ProtectedRoute me={me} loaded={loaded}>
 								<Couples />
 							</ProtectedRoute>
 						}
 					/>
 					{/* 
-						<Route path="outings" element={<ProtectedRoute me={me} />}>
+						<Route path="outings" element={<ProtectedRoute me={me} loaded={loaded} />}>
 							<Route path="outings" element={<Outings />}>
 								<Route
 									index
