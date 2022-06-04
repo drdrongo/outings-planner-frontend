@@ -31,11 +31,9 @@ function App() {
 			return;
 		}
 		if (response) {
-			console.log('updating me')
 			updateMe(response);
 		} else {
 		}
-		console.log('setting to loaded')
 		setLoaded(true);
 	};
 

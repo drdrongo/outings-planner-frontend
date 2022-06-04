@@ -31,6 +31,8 @@ interface OutingsListProps {
 }
 
 const OutingsList = ({ outings }: OutingsListProps) => {
+	if (!outings) return null;
+
 	return (
 		<>
 			{outings.map(ot => {

@@ -21,6 +21,5 @@ export const fetchMyPartner: Function = async (myId: number) => {
 	});
   const couple: ICouple = response.couple;
   const partner: IUser = response.partner;
-	console.log({ couple, partner });
 	return { couple, partner };
 };

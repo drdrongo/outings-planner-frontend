@@ -23,7 +23,6 @@ function LoginForm() {
 	const onSubmit = handleSubmit(async data => {
 		const url = '/auth/login';
 		const response = await http.post(url, data);
-		console.log({ response });
 		if (response.token && response.user) {
 			login(response);
 		}

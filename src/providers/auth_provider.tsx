@@ -33,7 +33,6 @@ const AuthProvider = ({ children }: Props) => {
 
 	const getMe = () => {
 		fetchMe().then((response: IUser) => {
-			console.log({ response })
 			setMe({ ...response, auth: true });
 		});
 	};

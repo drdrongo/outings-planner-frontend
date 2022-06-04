@@ -13,12 +13,6 @@ const MyCouple = () => {
 	if (!part || !myCouple)
 		return <PageLayout>No partner ya loser!</PageLayout>;
 
-	console.log({
-		me,
-		myCouple,
-		part,
-	});
-
 	const avatarSize = 120;
 
 	const datify = (timestamp: string) => {

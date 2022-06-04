@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import { useEffect } from 'react';
 import {
 	Outlet,
 	useSearchParams,
@@ -10,10 +11,17 @@ import http from '../../data/http';
 
 export default function Outings() {
 	let [searchParams, setSearchParams] = useSearchParams(); // works like setState, but stores data in the search params instead
-
-
 	const { outings, doSearch, clearSearch } = useOutingsContext();
 	const { theme, isLight } = useThemeContext();
+
+	useEffect(() => { // TODO: Make this versatile and work for other search fields, like genre.
+		const title = searchParams.get('title');
+		if (title) {
+			doSearch('title', title)
+		} else {
+			clearSearch();
+		}
+	}, [searchParams]);
 
 	return (
 		<div className="main" style={{
@@ -26,13 +34,11 @@ export default function Outings() {
 				}}
 			>
 				<input
-					value={searchParams.get('filter') || ''}
+					value={searchParams.get('title') || ''}
 					onChange={event => {
-						const filter = event.target.value;
-						console.log({ filter })
-						if (filter) {
-							doSearch('title', filter)
-							// setSearchParams({ filter });
+						const title = event.target.value;
+						if (title) {
+							setSearchParams({ title });
 						} else {
 							setSearchParams({});
 						}

@@ -10,16 +10,13 @@ class Api::V1::OutingsController < ApplicationController
 
   def index
     where = '1=1'
-    puts 'farts'
-    p params
-    search = params[:search]
-
+    search = params
     if search
       search.each do |key, val|
-        if %i[genre mood price is_complete is_favorite].include? key # %i for array of symbols
+        if %w[genre mood price is_complete is_favorite].include? key # %i for array of symbols
           where += " AND #{key} = '#{val}'"
-        elsif %i[title].include? key
-          where += " AND #{key} LIKE '%#{val}%'"
+        elsif %w[title].include? key
+          where += " AND LOWER(#{key}) LIKE '%#{val.downcase}%'"
         end
       end
     end
@@ -31,7 +28,8 @@ class Api::V1::OutingsController < ApplicationController
     if @outings
       render json: @outings, status: 200
     else
-      render json: { errors: @outings.errors.full_messages }, status: 422
+      render json: []
+      # render json: { errors: @outings.errors.full_messages }, status: 422
     end
   end
 

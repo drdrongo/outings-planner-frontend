@@ -11,7 +11,6 @@ export default function Swiper() {
 
 	const { theme, isLight } = useThemeContext();
   const { outings } = useOutingsContext();
-  console.log(outings[0])
 
 	return (
 		<div className="main" style={{

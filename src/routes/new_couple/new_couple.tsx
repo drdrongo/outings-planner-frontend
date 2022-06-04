@@ -24,7 +24,6 @@ export default function NewCouple() {
 			friend_email: data.friend_email,
 			user1_id: +me.id,
 		})
-		console.log({ response })
 		return response;
 	});
 

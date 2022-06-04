@@ -57,7 +57,6 @@ export default function NewOuting() {
 			setNewOutingId(response.id);
 			reset();
 		}
-		console.log({ responseFromNewOuting: response });
 		return response;
 	});
 

@@ -36,7 +36,6 @@ export default function NewUser() {
 			body: JSON.stringify(data), // body data type must match "Content-Type" header
 		});
 		const r = response.json(); // parses JSON response into native JavaScript objects
-		console.log({ r });
 		return r;
 	};
 

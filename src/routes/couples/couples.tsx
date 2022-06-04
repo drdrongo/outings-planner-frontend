@@ -19,7 +19,6 @@ export default function Couples() {
 
 	const fetchCouples = async () => {
 		const response = await http.get('/api/v1/couples', { user_id: me.id });
-		console.log({ response });
 		setCouples(response);
 	};
 

@@ -55,7 +55,6 @@ export default function OutingsShow() {
 	} = outing;
 
 
-  console.log(outing)
   // TODO: This page has its own header and stuff?
   return (
     <PageLayout id="Outing">

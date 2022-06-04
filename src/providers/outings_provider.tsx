@@ -37,8 +37,7 @@ const OutingsProvider = ({ children }: Props) => {
 
 
 	const fetchOutings: Function = async (params: any = {}) => {
-		console.log({ params })
-		const outings: Outing[] = await http.get('/api/v1/outings', { outings: params});
+		const outings: Outing[] = await http.get('/api/v1/outings', params);
 		return outings;
 	};
 
@@ -62,7 +61,6 @@ const OutingsProvider = ({ children }: Props) => {
 	}
 
 	useEffect(() => {
-		console.log({ searchState})
 		fetchOutings(searchState).then((response: Outing[]) => setOutings(response));
 	}, [searchState]);
 
