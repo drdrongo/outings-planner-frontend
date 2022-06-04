@@ -11,7 +11,8 @@ import http from '../../data/http';
 export default function Outings() {
 	let [searchParams, setSearchParams] = useSearchParams(); // works like setState, but stores data in the search params instead
 
-	const { outings } = useOutingsContext();
+
+	const { outings, doSearch, clearSearch } = useOutingsContext();
 	const { theme, isLight } = useThemeContext();
 
 	return (
@@ -28,8 +29,10 @@ export default function Outings() {
 					value={searchParams.get('filter') || ''}
 					onChange={event => {
 						const filter = event.target.value;
+						console.log({ filter })
 						if (filter) {
-							setSearchParams({ filter });
+							doSearch('title', filter)
+							// setSearchParams({ filter });
 						} else {
 							setSearchParams({});
 						}

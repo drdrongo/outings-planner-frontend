@@ -17,7 +17,6 @@ export interface Outing {
 
 export const fetchOutings: Function = async () => {
   const outings: Outing[] = await http.get('/api/v1/outings');
-  console.log({ outings })
   return outings;
 };
 

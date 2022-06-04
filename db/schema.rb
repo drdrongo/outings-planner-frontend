@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_17_140419) do
+ActiveRecord::Schema.define(version: 2022_06_04_133938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2022_05_17_140419) do
     t.text "description", default: "", null: false
     t.integer "mood", default: 0, null: false
     t.integer "price", default: 0, null: false
-    t.integer "genre", default: 0, null: false
+    t.string "genre", default: "", null: false
     t.text "images", default: [], null: false, array: true
     t.index ["couple_id"], name: "index_outings_on_couple_id"
     t.index ["spot_id"], name: "index_outings_on_spot_id"

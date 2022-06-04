@@ -34,8 +34,6 @@ class AuthenticationController < ApplicationController
     header = header.split(' ').last if header
     begin
       @decoded = JsonWebToken.decode(header)
-      puts 'yo yo yo yo yo yo yoy oy oy oyoy oy o'
-      p @decoded
       @current_user = User.find(@decoded[:user_id])
       render json: @current_user, status: :ok
     rescue ActiveRecord::RecordNotFound => e
