@@ -17,9 +17,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
-  password: yoshi
-  host: db # Should be "db" because that is the name of the db in docker-compose.yml
+  # username: postgres
+  # password: yoshi
+  host: localhost # This is for local
+  # host: db # Should be "db" because that is the name of the db in docker-compose.yml
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>

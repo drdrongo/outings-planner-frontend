@@ -35,8 +35,36 @@
 # )
 # couple.save!
 
+couple = Couple.find_by_id 1
 
-couple = Couple.find(1)
+unless couple
+  User.create(
+    f_name: 'Hayato',
+    l_name: 'Clarke',
+    email: 'hayatoclarke@gmail.com',
+    password: 'secret',
+    image: 'https://res.cloudinary.com/hayatocloud/image/upload/v1636882885/hayato-moustache_havo8m.jpg',
+    birthday: Date.new(1993, 11, 19)
+  )
+
+  User.create(
+    f_name: 'Erica',
+    l_name: 'Frumson',
+    email: 'trippy-ricky@hotmail.com',
+    password: 'secret',
+    image: 'https://pkimgcdn.peekyou.com/0b67f79311d0199179159a4ec80827b9.jpeg',
+    birthday: Date.new(1999, 1, 1)
+  )
+
+  u1 = User.find(1)
+  u2 = User.find(2)
+
+  couple = Couple.create!(
+    user1_id: u1.id,
+    user2_id: u2.id,
+    total_outings: 0
+  )
+end
 
 Outing.delete_all
 
