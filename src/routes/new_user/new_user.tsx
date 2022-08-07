@@ -21,7 +21,7 @@ export default function NewUser() {
 	} = useForm<FormData>();
 
 	const onSubmit = async (data : FormData) => {
-		const url = 'http://localhost:3001/api/v1/users';
+		const url = 'http://localhost:8000/api/v1/users';
 		const response = await fetch(url, {
 			method: 'POST', // *GET, POST, PUT, DELETE, etc.
 			mode: 'cors', // no-cors, *cors, same-origin
