@@ -36,6 +36,7 @@ function App() {
 		}
 		setLoaded(true);
 	};
+	console.log("hello!")
 
 	const LoadingScreen = () => {
 		return (

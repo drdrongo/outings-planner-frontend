@@ -84,13 +84,16 @@ export default function NewOuting() {
 		{ value: 5, label: '$$$$$' },
 	];
 	
-
+	console.log(process.env);
+	console.log(process.env.REACT_APP_CATEGORIES)
 	const genres: { val: any; lab: string }[] | [] =
 		process?.env?.REACT_APP_CATEGORIES?.split(',').map(act => ({
 			key: act,
 			val: act,
 			lab: act,
 		})) || [];
+
+		console.log({ genres })
 
 	if (!myCouple.id) return <PageLayout></PageLayout>;
 

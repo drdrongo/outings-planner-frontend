@@ -31,8 +31,8 @@ interface OutingsListProps {
 }
 
 const OutingsList = ({ outings }: OutingsListProps) => {
+	console.log({isArray: Array.isArray(outings)})
 	if (!outings || !Array.isArray(outings)) return null;
-	console.log({ outings })
 	
 	return (
 		<>
