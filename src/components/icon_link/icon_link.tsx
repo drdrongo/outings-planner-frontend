@@ -1,6 +1,6 @@
 import { Tooltip } from '@material-ui/core';
 import React from 'react';
-import { Link, To } from 'react-router-dom';
+import { Link, NavLink, To } from 'react-router-dom';
 import { useThemeContext } from '../../contexts/theme_context';
 
 type Props = {
@@ -10,13 +10,15 @@ type Props = {
 };
 
 const IconLink = ({ to, children, title }: Props) => {
-	const { theme } = useThemeContext();
+	// const { theme } = useThemeContext();
 
 	return (
 		<Tooltip title={title}>
-			<Link style={{ ...theme }} to={to}>
+			<NavLink 
+			// style={{ ...theme }} 
+			to={to}>
 				{children}
-			</Link>
+			</NavLink>
 		</Tooltip>
 	);
 };

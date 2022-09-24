@@ -5,7 +5,8 @@ import ThemeButton from '../theme_button';
 import './styles.scss';
 import { useAuthContext } from '../../contexts/auth_context';
 import { useNavigate } from 'react-router-dom';
-import CastleIcon from '@mui/icons-material/Castle';
+
+import OutingLogo from '../outing_logo/outing_logo';
 
 const Header = () => {
 	const { me, logout } = useAuthContext();
@@ -16,21 +17,24 @@ const Header = () => {
 		<header
 			id="app-header"
 			style={{
-				...theme,
+				// ...theme,
 				borderBottomWidth: '1px',
 				borderBottomStyle: 'solid',
 				borderBottomColor: theme.color,
 			}}
 		>
+
 			<nav>
-				<CastleIcon
+				{/* <CastleIcon
 					style={{
 						marginRight: 'auto',
 						marginLeft: '1.2rem',
 						fontSize: '3.2rem',
 					}}
 					onClick={() => navigate('/')}
-				/>
+				/> */}
+				<OutingLogo />
+				
 				<ThemeButton />
 				{me.auth && <h3>Hello, {me.email}</h3>}
 

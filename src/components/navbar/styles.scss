@@ -1,3 +1,5 @@
+@import 'src/styles/mixins.scss';
+
 #navbar {
   display: flex;
   flex-direction: row;
@@ -7,12 +9,13 @@
   flex-shrink: 0;
   border-top: 1px solid red;
 
-  @media only screen and (min-width: 768px) {
+  @include desktop {
     flex-direction: column;
     width: 10rem;
     height: 100%;
     border-top: none;
-    border-right: 1px solid right;
+    border-right: 1px solid var(--clrTertiary);
+    background-color: var(--clrSecondary);
   }
 
   a {
@@ -22,10 +25,13 @@
     justify-content: center;
     white-space: nowrap;
     width: 100%;
-    border-bottom: 1px solid white;
+    color: var(--clrText1);
+    border-bottom: 1px solid var(--clrTheme);
 
+    &.active,
     &:hover {
-      filter: brightness(90%);
+      background-color: var(--clrTheme);
+      color: var(--clrSecondary);
     }
   }
 }
