@@ -4,10 +4,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-right: 1px solid white;
   width: 100%;
   flex-shrink: 0;
-  border-top: 1px solid red;
+  background-color: var(--clrSecondary);
+
+  @include phone {
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+  }
 
   @include desktop {
     flex-direction: column;
@@ -15,11 +18,10 @@
     height: 100%;
     border-top: none;
     border-right: 1px solid var(--clrTertiary);
-    background-color: var(--clrSecondary);
   }
 
   a {
-    padding: 2rem;
+    padding: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,6 +29,16 @@
     width: 100%;
     color: var(--clrText1);
     border-bottom: 1px solid var(--clrTheme);
+
+    &>svg {
+      @include phone {
+        font-size: 3rem;
+      }
+    }
+
+    @include desktop {
+      padding: 2rem;
+    }
 
     &.active,
     &:hover {
