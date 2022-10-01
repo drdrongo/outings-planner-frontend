@@ -10,7 +10,7 @@ import OutingLogo from '../outing_logo/outing_logo';
 
 const Header = () => {
 	const { me, logout } = useAuthContext();
-	const { theme } = useThemeContext();
+	const { theme, isLight } = useThemeContext();
 	const navigate = useNavigate();
 
 	return (
@@ -21,22 +21,16 @@ const Header = () => {
 				borderBottomWidth: '1px',
 				borderBottomStyle: 'solid',
 				borderBottomColor: theme.color,
+				backgroundColor: theme.backgroundColor
 			}}
 		>
 
-			<nav>
-				{/* <CastleIcon
-					style={{
-						marginRight: 'auto',
-						marginLeft: '1.2rem',
-						fontSize: '3.2rem',
-					}}
-					onClick={() => navigate('/')}
-				/> */}
 				<OutingLogo />
 				
+				
+				{me.auth && <h3>Hello, {me.f_name}</h3>}
+
 				<ThemeButton />
-				{me.auth && <h3>Hello, {me.email}</h3>}
 
 				{me.auth ? (
 					<Button onClick={() => logout()}>Log Out</Button>
@@ -50,7 +44,6 @@ const Header = () => {
 						</Button>
 					</>
 				)}
-			</nav>
 		</header>
 	);
 };

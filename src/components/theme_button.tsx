@@ -1,3 +1,4 @@
+import { DarkMode, LightMode } from '@mui/icons-material';
 import { useContext } from 'react';
 import { ThemeContext } from '../contexts/theme_context';
 
@@ -9,7 +10,7 @@ function ThemeButton() {
 			className="theme-button"
 			onClick={() => toggleTheme()}
 			style={{
-				backgroundColor: isLight ? 'white' : 'grey',
+				backgroundColor: isLight ? 'lightgrey' : 'grey',
 				marginRight: '2rem',
 			}}
 		>
@@ -20,7 +21,7 @@ function ThemeButton() {
 					...theme,
 				}}
 			>
-				{isLight ? '☀️' : '🌛'}
+				{isLight ? <LightMode /> : <DarkMode />}
 			</div>
 		</button>
 	);

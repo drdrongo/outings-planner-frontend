@@ -1,14 +1,18 @@
 :root {
+  // TODO: Fix this, im confused.
+  --clrDark: #413B3A;
+  --clrLight: #FFFFFF;
+
   --clrTheme: #A3C4F3;
   --clrPrimary: #A3C4F3;
-  --clrSecondary: #FFFFFF;
-  --clrTertiary: #413B3A;
+  --clrSecondary: var(--clrLight);
+  --clrTertiary: var(--clrDark);
 
-  --clrText: #413B3A;
-  --clrText1: var(--clrText1);
+  --clrText: var(--clrTertiary);
+  --clrText1: var(--clrText);
 
-  --clrBg: var(--clrTheme);
-  --clrBg1: var(--clrBg1);
+  --clrBg: var(--clrSecondary);
+  --clrBg1: var(--clrBg);
 
   --clrHighlight: var(--clrPrimary);
 }

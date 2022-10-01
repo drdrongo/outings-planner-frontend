@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { themes, ThemeContext } from '../contexts/theme_context';
 import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
 
@@ -17,18 +17,37 @@ const muiTheme = createTheme({
 
 
 export const ThemeProvider = ({ children }: Props) => {
-  const [isLight, setIsLight] = useState(true);
-	const [theme, setTheme] = useState(themes.light);
+  const [isLight, setIsLight] = useState(localStorage.getItem('clrTheme') === 'light');
+	const [theme, setTheme] = useState(isLight ? themes.light : themes.dark);
+
+	const setRootColors = (newTheme: string) => {
+		const newTxtClr = newTheme === 'dark' ? 'var(--clrDark)' : 'var(--clrLight)';
+		const newBgClr = newTheme === 'dark' ? 'var(--clrLight)' : 'var(--clrDark)';
+		document.documentElement.style.setProperty('--clrSecondary', newTxtClr);
+		document.documentElement.style.setProperty('--clrTertiary', newBgClr);
+	}
 
 	const toggleTheme: Function = () => {
-		if (theme === themes.light) {
+		const newTheme = theme === themes.light ? 'dark' : 'light';
+
+		if (newTheme === 'dark') {
       setIsLight(false);
 			setTheme(themes.dark);
 		} else {
       setIsLight(true);
 			setTheme(themes.light);
 		}
+		setRootColors(newTheme);
+		localStorage.setItem('clrTheme', newTheme)
 	};
+
+	useEffect(() => {
+		if (isLight) {
+			setRootColors('light');
+		} else {
+			setRootColors('dark');
+		}
+	}, []);
 
 	return (
 		<MuiThemeProvider theme={muiTheme}>

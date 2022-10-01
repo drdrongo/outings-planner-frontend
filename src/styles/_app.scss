@@ -35,9 +35,9 @@ body {
         width: 100%;
         flex-grow: 1;
         overflow-y: auto;
-        flex-direction: column;
 
         .main {
+          background-color: var(--clrBg1);
           flex-grow: 1;
         }
       }
