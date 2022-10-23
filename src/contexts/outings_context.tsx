@@ -1,20 +1,22 @@
 import { createContext, useContext, } from 'react';
-import { Outing } from '../data/outings';
+import { IOuting } from '../data/outings';
 
 type GlobalOutings = {
-	outings: Outing[];
-	getOuting: Function;
-	updateOuting: Function;
+	outings: IOuting[];
+	outing?: IOuting;
 	doSearch: Function;
 	clearSearch: Function;
+	paginate: Function;
+	updateOuting: Function;
 };
 
 export const OutingsContext = createContext<GlobalOutings>({
 	outings: [],
-	getOuting: () => {},
-	updateOuting: () => {},
-	doSearch: () => {},
+	outing: undefined,
+	doSearch:  () => {},
 	clearSearch: () => {},
+	paginate: () => {},
+	updateOuting: () => {},
 });
 
 export const useOutingsContext = () => useContext(OutingsContext);

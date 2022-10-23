@@ -89,34 +89,22 @@ function App() {
 							</ProtectedRoute>
 						}
 					/>
-
 					<Route
 						path="outings"
 						element={
-							<ProtectedRoute me={me} loaded={loaded}>
+							// <ProtectedRoute me={me} loaded={loaded}>
 								<Outings />
-							</ProtectedRoute>
+							//</ProtectedRoute>
 						}
-					/>
-					<Route
-						path="outings/:outingId"
-						element={
-							<ProtectedRoute me={me} loaded={loaded}>
-								<OutingsShow />
-							</ProtectedRoute>
-						}
-					></Route>
-					{/* <Route path=":outingId" element={<OutingsShow />} /> */}
-					<Route path="outings" element={<Outings />}>
+					>
 						<Route
-							index
+							path=":outingId"
 							element={
-								<main style={{ padding: '1rem' }}>
-									<p>Select an outing</p>
-								</main>
+									<OutingsShow />
+								// <ProtectedRoute me={me} loaded={loaded}>
+								// </ProtectedRoute>
 							}
 						/>
-						<Route path=":outingId" element={<OutingsShow />} />
 					</Route>
 					<Route
 						path="users"
@@ -142,29 +130,6 @@ function App() {
 							</ProtectedRoute>
 						}
 					/>
-					{/* 
-						<Route path="outings" element={<ProtectedRoute me={me} loaded={loaded} />}>
-							<Route path="outings" element={<Outings />}>
-								<Route
-									index
-									element={
-										<main style={{ padding: '1rem' }}>
-											<p>Select an outing</p>
-										</main>
-									}
-								/>
-								<Route path=":outingId" element={<OutingsShow />} />
-							</Route>
-						</Route>
-
-						<Route
-							path="*"
-							element={
-								<main style={{ padding: '1rem' }}>
-									<p>There's nothing here!</p>
-								</main>
-							}
-						/> */}
 				</Routes>
 			</div>
 

@@ -1,10 +1,10 @@
 import { Image } from '@mui/icons-material';
 import React from 'react'
-import { Outing } from '../data/outings'
+import { IOuting } from '../data/outings'
 
 
 interface Props {
-  outing: Outing;
+  outing: IOuting;
 }
 
 // id: number;

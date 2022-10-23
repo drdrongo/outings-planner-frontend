@@ -1,41 +1,25 @@
 import './styles.scss';
 import { useMemo, useContext, useCallback, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { OutingsContext } from '../../contexts/outings_context';
+import { OutingsContext, useOutingsContext } from '../../contexts/outings_context';
 
 // icons
 import { CurrencyYen, Star } from '@mui/icons-material';
-import { Outing } from '../../data/outings';
-import http from '../../data/http';
 import PageLayout from '../../components/page_layout/page_layout';
 import { IconButton } from '@mui/material';
 
 export default function OutingsShow() {
 	const params: any = useParams();
-  const [outing, setOuting] = useState<Outing | null>(null);
-	const { outings, updateOuting } = useContext(OutingsContext);
+  console.log({ params })
+  const { outing, updateOuting } = useOutingsContext();
 
+  console.log({ outing })
 	const toggleFavorite = useCallback(async () => {
+    if (!outing) return;
+
     const thisId = parseInt(params.outingId, 10);
-		http.post('/api/v1/outings/toggle_favorite', { id: thisId });
-    
-    const outing = outings.find(out => out.id === parseInt(params.outingId, 10));
-    if (!outing) {
-      console.error('No existing outing in toggleFavorite');
-      return;
-    }
-
-    updateOuting(thisId, { is_favorite: !outing.is_favorite})
-	}, [updateOuting, params, outings]);
-
-  const getOuting: () => Promise<void> = useCallback(async () => {
-    const o: Outing =  await http.get(`/api/v1/outings/${parseInt(params.outingId, 10)}`)
-    setOuting(o);
-  }, [params.outingId]);
-
-  useEffect(() => {
-    getOuting(); // todo: change to use usequery instead.
-  }, [getOuting]);
+    updateOuting(thisId, { is_favorite: !outing.is_favorite });
+	}, [updateOuting, params, outing]);
 
   if (!outing) {
 		return (

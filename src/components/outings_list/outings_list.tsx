@@ -1,5 +1,5 @@
 import './styles.scss';
-import { Outing } from '../../data/outings';
+import { IOuting } from '../../data/outings';
 import {
 	NavLink,
 	useLocation,
@@ -12,7 +12,7 @@ function QueryNavLink({ to = '', ...props }: NavLinkProps) {
 }
 
 interface OutingItemProps {
-	outing: Outing;
+	outing: IOuting;
 }
 
 const OutingItem = ({ outing }: OutingItemProps) => {
@@ -27,7 +27,7 @@ const OutingItem = ({ outing }: OutingItemProps) => {
 };
 
 interface OutingsListProps {
-	outings: Outing[];
+	outings: IOuting[];
 }
 
 const OutingsList = ({ outings }: OutingsListProps) => {
