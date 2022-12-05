@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 // price: number;
 // mood: number;
 // category: number;
-// image?: string;
+// images?: string;
 // genre: number;
 // is_favorite: Boolean;
 // is_complete: Boolean;
@@ -166,7 +166,7 @@ export default function NewOuting() {
 									const val = Array.isArray(value) ? value[0] : value;
 									if (val !== moodVal) {
 										setMoodVal(val);
-										document.documentElement.style.setProperty('--mood-value', `url('..\/..\/assets\/images\/mood-face-${val}.png')`);
+										document.documentElement.style.setProperty('--mood-value', `url('../../assets/images/mood-face-${val}.png')`);
 									}
 								}}
 								valueLabelDisplay="auto"

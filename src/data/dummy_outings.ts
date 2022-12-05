@@ -5,7 +5,7 @@ interface Outing {
   price: number;
   mood: number;
   category: number;
-  image?: string;
+  images?: string;
   // rating: number;
   // plannedTime: Date;
   // images: string;

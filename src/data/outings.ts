@@ -1,4 +1,5 @@
 import http from './http';
+import { IUser } from './users';
 
 export interface IOuting {
   id: number;
@@ -7,12 +8,24 @@ export interface IOuting {
   price: number;
   mood: number;
   category: number;
-  image?: string;
+  images?: string;
   genre: number;
   is_favorite: Boolean;
   is_complete: Boolean;
   rating: number;
+  user_image: string;
+  user_f_name: string;
+  user_id: number;
+  location: string;
 }
+
+
+// export interface IOuting extends IOuting {
+//   user_image: string;
+//   user_f_name: string;
+//   user_id: number;
+// }
+
 
 export interface OutingCreateParams {
   title: string;
@@ -20,7 +33,7 @@ export interface OutingCreateParams {
   price: number;
   mood: number;
   category: number;
-  image?: string;
+  images?: string;
   genre: number;
 }
 
@@ -31,7 +44,7 @@ export interface IOutingUpdParams {
   price?: number;
   mood?: number;
   category?: number;
-  image?: string;
+  images?: string;
   genre: number;
   is_favorite?: Boolean;
   is_complete?: Boolean;
@@ -51,6 +64,7 @@ class Outing {
       data?: IOuting[];
       errors?: any;
     } = await http.get('/api/v1/outings', params);
+    console.log({ data })
     if (data) {
       return data;
     } else {

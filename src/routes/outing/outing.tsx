@@ -35,7 +35,7 @@ export default function OutingsShow() {
 		price,
     genre,
 		description,
-		image,
+		images,
 	} = outing;
 
 
@@ -64,7 +64,7 @@ export default function OutingsShow() {
         <p>Genre:</p>
         <p>{genre}</p>
         <p>{description}</p>
-        {image && <img src={image} alt="" />}
+        {images && <img src={images} alt="" />}
       </main>
     </PageLayout>
   );

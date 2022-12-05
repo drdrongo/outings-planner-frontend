@@ -28,7 +28,6 @@ function reducer(state: any, action: any) {
 
 const useOutings = () => {
   const foo = useParams();
-  console.log('333', foo)
   let { outingId } = useParams();
 
   const [outing, setOuting] = useState();
