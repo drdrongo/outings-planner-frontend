@@ -32,6 +32,7 @@ body {
 
       #layout {
         display: flex;
+        flex-direction: column;
         width: 100%;
         flex-grow: 1;
         overflow-y: auto;
@@ -39,6 +40,8 @@ body {
         .main {
           background-color: var(--clrBg1);
           flex-grow: 1;
+          flex-shrink: 0;
+          
         }
       }
     }

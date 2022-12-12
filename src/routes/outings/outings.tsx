@@ -2,6 +2,7 @@ import { Button } from '@mui/material';
 import { useEffect } from 'react';
 import {
 	Outlet,
+	useParams,
 	useSearchParams,
 } from 'react-router-dom';
 import OutingsList from '../../components/outings_list/outings_list';
@@ -10,9 +11,16 @@ import { useThemeContext } from '../../contexts/theme_context';
 import http from '../../data/http';
 
 export default function Outings() {
+  let { outingId } = useParams();
+  console.log({ outingId })
+
 	let [searchParams, setSearchParams] = useSearchParams(); // works like setState, but stores data in the search params instead
-	const { outings, doSearch, clearSearch } = useOutingsContext();
+	const { outings, doSearch, clearSearch, setOutingId } = useOutingsContext();
 	const { theme, isLight } = useThemeContext();
+
+	useEffect(() => {
+		setOutingId(outingId);
+	}, [outingId]);
 
 	useEffect(() => { // TODO: Make this versatile and work for other search fields, like genre.
 		const title = searchParams.get('title');
@@ -44,7 +52,7 @@ export default function Outings() {
 						}
 					}}
 				/>
-				<OutingsList outings={outings}/>
+				
 			</nav>
 			<Outlet /> {/* Renders the child route's element, if there is one.*/}
 		</div>

@@ -18,6 +18,7 @@ import Signup from './routes/signup/signup';
 import Users from './routes/users';
 import { useResponsiveContext } from './contexts/responsive_context';
 import MyCouple from './routes/my_couple/my_couple';
+import OutingsList from './components/outings_list/outings_list';
 
 function App() {
 	const { isMobile, isDesktop } = useResponsiveContext();
@@ -93,7 +94,7 @@ function App() {
 						path="outings"
 						element={
 							// <ProtectedRoute me={me} loaded={loaded}>
-								<Outings />
+							<Outings />
 							//</ProtectedRoute>
 						}
 					>
@@ -103,6 +104,12 @@ function App() {
 									<OutingsShow />
 								// <ProtectedRoute me={me} loaded={loaded}>
 								// </ProtectedRoute>
+							}
+						/>
+						<Route
+							path=''
+							element={
+								<OutingsList />
 							}
 						/>
 					</Route>

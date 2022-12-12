@@ -5,11 +5,9 @@ import { useOutingsContext } from "../../contexts/outings_context";
 import { useThemeContext } from "../../contexts/theme_context";
 
 const AuthHome = () => {
-	const { outings } = useOutingsContext();
-
 	return <div id="home-inner">
 		<h1>Top Outings</h1>
-		<OutingsList outings={outings}/>
+		<OutingsList />
 	</div>
 }
 

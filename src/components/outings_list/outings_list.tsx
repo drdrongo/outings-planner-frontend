@@ -3,6 +3,7 @@ import { IOuting } from '../../data/outings';
 import { NavLink, useLocation, NavLinkProps } from 'react-router-dom';
 import hiking from '../../assets/images/activities/hiking.jpeg';
 import { Avatar } from '@mui/material';
+import { useOutingsContext } from 'src/contexts/outings_context';
 
 function QueryNavLink({ to = '', ...props }: NavLinkProps) {
 	const location = useLocation();
@@ -42,14 +43,20 @@ const OutingItem = ({ outing }: OutingItemProps) => {
 
 			<div className="outing-information">
 					<div className="outing-options">
-						{[...Array(outing.price)].map(() => '$')}
+						<span>
+							{[...Array(outing.price)].map(() => '$')}
+						</span>
 						<div style={{
 							backgroundImage: `url('../../assets/images/mood-face-${outing.mood}.png')`,
 							width: '2rem',
 							height: '2rem',
 							backgroundSize: 'contain'
 						}} />
-						<span>{outing.genre}</span>
+						<span
+							style={{
+								marginRight: 'auto'
+							}}
+						>{outing.genre}</span>
 						<span>{outing.location}</span>
 					</div>
 					<p>{outing.description}</p>
@@ -62,7 +69,9 @@ interface OutingsListProps {
 	outings: IOuting[];
 }
 
-const OutingsList = ({ outings }: OutingsListProps) => {
+const OutingsList = () => {
+	const { outings } = useOutingsContext();
+
 	if (!outings || !Array.isArray(outings)) return null;
 
 	return (

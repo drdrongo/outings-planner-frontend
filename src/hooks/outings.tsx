@@ -27,9 +27,7 @@ function reducer(state: any, action: any) {
 }
 
 const useOutings = () => {
-  const foo = useParams();
-  let { outingId } = useParams();
-
+  const [outingId, setOutingId] = useState();
   const [outing, setOuting] = useState();
   const [outings, setOutings] = useState([]);
 
@@ -90,7 +88,9 @@ const useOutings = () => {
     getOutings();
   }, [getOutings]);
 
-  return { outings, outing, doSearch, clearSearch, paginate, updateOuting };
+  return { outings, outing,
+    setOutingId,
+    doSearch, clearSearch, paginate, updateOuting };
 };
 
 export default useOutings;

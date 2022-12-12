@@ -10,10 +10,8 @@ import { IconButton } from '@mui/material';
 
 export default function OutingsShow() {
 	const params: any = useParams();
-  console.log({ params })
   const { outing, updateOuting } = useOutingsContext();
 
-  console.log({ outing })
 	const toggleFavorite = useCallback(async () => {
     if (!outing) return;
 
@@ -21,6 +19,7 @@ export default function OutingsShow() {
     updateOuting(thisId, { is_favorite: !outing.is_favorite });
 	}, [updateOuting, params, outing]);
 
+  console.log(outing);
   if (!outing) {
 		return (
 			<main className="outing-content" style={{ padding: '1rem' }}>

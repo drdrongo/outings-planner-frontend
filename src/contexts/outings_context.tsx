@@ -8,6 +8,7 @@ type GlobalOutings = {
 	clearSearch: Function;
 	paginate: Function;
 	updateOuting: Function;
+	setOutingId: Function;
 };
 
 export const OutingsContext = createContext<GlobalOutings>({
@@ -17,6 +18,7 @@ export const OutingsContext = createContext<GlobalOutings>({
 	clearSearch: () => {},
 	paginate: () => {},
 	updateOuting: () => {},
+	setOutingId: () => {},
 });
 
 export const useOutingsContext = () => useContext(OutingsContext);

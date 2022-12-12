@@ -1,5 +1,5 @@
 .outing-item {
-  height: 10rem;
+  height: 21.5rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -53,12 +53,19 @@
 
 
   div.outing-information {
+    width: 100%;
+    height: 8rem;
+    flex-shrink: 0;
     div.outing-options {
       font-size: 1.4rem;
       display: flex;
       align-items: center;
       width: 100%;
-      border: 1px solid red;
+      padding: 0.5rem 1rem;
+
+      :not(:last-child) {
+        margin-right: 20px;
+      }
     }
 
     p {
@@ -66,7 +73,7 @@
       margin: 0;
       margin-left: 1.2rem;
       margin-right: 1.2rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.8rem;
       margin-top: 0.8rem;
     }
 
