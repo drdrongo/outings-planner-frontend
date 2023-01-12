@@ -9,6 +9,7 @@ type GlobalOutings = {
 	paginate: Function;
 	updateOuting: Function;
 	setOutingId: Function;
+	isFetchingOutings: Boolean;
 };
 
 export const OutingsContext = createContext<GlobalOutings>({
@@ -19,6 +20,7 @@ export const OutingsContext = createContext<GlobalOutings>({
 	paginate: () => {},
 	updateOuting: () => {},
 	setOutingId: () => {},
+	isFetchingOutings: false,
 });
 
 export const useOutingsContext = () => useContext(OutingsContext);

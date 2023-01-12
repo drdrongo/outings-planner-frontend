@@ -7,11 +7,11 @@ type Props = {
 };
 
 const OutingsProvider = ({ children }: Props) => {
-	const { outings, outing, doSearch, clearSearch, paginate, updateOuting, setOutingId } = useOutings();
+	const otContext = useOutings();
 
 	return (
 		<OutingsContext.Provider
-			value={{ outings, outing, doSearch, clearSearch, paginate, updateOuting, setOutingId,  }}
+			value={otContext}
 		>
 			{children}
 		</OutingsContext.Provider>

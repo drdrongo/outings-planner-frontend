@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { OutingsContext, useOutingsContext } from '../../contexts/outings_context';
 
 // icons
-import { CurrencyYen, Star } from '@mui/icons-material';
+import { CurrencyYen, Favorite, Star } from '@mui/icons-material';
 import PageLayout from '../../components/page_layout/page_layout';
 import { IconButton } from '@mui/material';
 
@@ -16,10 +16,9 @@ export default function OutingsShow() {
     if (!outing) return;
 
     const thisId = parseInt(params.outingId, 10);
-    updateOuting(thisId, { is_favorite: !outing.is_favorite });
+    updateOuting(thisId, { is_favorite: !is_favorite });
 	}, [updateOuting, params, outing]);
 
-  console.log(outing);
   if (!outing) {
 		return (
 			<main className="outing-content" style={{ padding: '1rem' }}>
@@ -35,6 +34,7 @@ export default function OutingsShow() {
     genre,
 		description,
 		images,
+    is_favorite
 	} = outing;
 
 
@@ -42,14 +42,15 @@ export default function OutingsShow() {
   return (
     <PageLayout id="Outing">
       <header className="outing-header">
-        <h3>{title}</h3>
         <IconButton onClick={toggleFavorite} >
-          {outing.is_favorite ? (
-            <Star style={{ color: 'gold' }} />
+          {is_favorite ? (
+            <Favorite style={{ color: 'gold' }} />
           ) : (
-            <Star style={{ color: 'grey' }} />
+            <Favorite style={{ color: 'grey' }} />
         )}
         </IconButton>
+
+        <h3>{title}</h3>
       </header>
       <main>
         <p>Excitement Rating:</p>

@@ -42,7 +42,7 @@ http.makeRequest = async function (method: string, api: string, body: object) {
 
 	let jsonBody: string = '';
 	body = removeEmptyItems(body);
-	const hasBody: boolean = ['POST', 'UPDATE'].includes(method) && !!body;
+	const hasBody: boolean = ['POST', 'PATCH', 'PUT', 'UPDATE'].includes(method) && !!body;
 
 	if (['GET', 'DELETE'].includes(method)) {
 		if (Object.keys(body).length > 0) {
@@ -54,7 +54,7 @@ http.makeRequest = async function (method: string, api: string, body: object) {
 	} else if (hasBody) {
 		jsonBody = JSON.stringify(body);
 	}
-
+	console.log({ method })
 	const response = await fetch(api, {
 		method,
 		headers: {
@@ -83,7 +83,7 @@ http.post = async function (api: string, body: object) {
 };
 
 http.update = async function (api: string, body: object) {
-	return await http.makeRequest('UPDATE', api, body);
+	return await http.makeRequest('PUT', api, body);
 };
 
 http.delete = async function (api: string, params: object) {

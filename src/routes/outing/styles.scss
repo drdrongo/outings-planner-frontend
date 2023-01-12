@@ -1,21 +1,24 @@
 #Outing {
+  background-color: var(--clrBg);
+  padding: 0 1.6rem;
+
   .outing-header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    height: 10rem;
+    height: 6rem;
     width: 100%;
-    background-color: white;
-    padding: 2rem;
+    
     h3 {
       margin: 0;
       margin-right: auto;
-      color: #444;
+      font-size: 3.2rem;
     }
 
     button {
-      margin-left: 1.5rem;
       margin-right: 0;
+      padding-left: 0;
+
       svg {
         font-size: 3.5rem;
       }

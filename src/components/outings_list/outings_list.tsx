@@ -4,6 +4,10 @@ import { NavLink, useLocation, NavLinkProps } from 'react-router-dom';
 import hiking from '../../assets/images/activities/hiking.jpeg';
 import { Avatar } from '@mui/material';
 import { useOutingsContext } from 'src/contexts/outings_context';
+import {useRef, useCallback, useEffect} from 'react'
+
+
+
 
 function QueryNavLink({ to = '', ...props }: NavLinkProps) {
 	const location = useLocation();
@@ -70,7 +74,28 @@ interface OutingsListProps {
 }
 
 const OutingsList = () => {
-	const { outings } = useOutingsContext();
+	const { outings, paginate, isFetchingOutings } = useOutingsContext();
+  const observerElem = useRef(null)
+
+	const handleObserver = useCallback((entries) => {
+		const [target] = entries
+		if(target.isIntersecting && !isFetchingOutings) {
+			console.log("yep, we are paginating.")
+			paginate();
+		}
+	}, [paginate, isFetchingOutings])
+	
+	useEffect(() => {
+		// const element = observerElem.current
+		// if (!element) return;
+
+		// const option = { threshold: 0 }
+	
+		// const observer = new IntersectionObserver(handleObserver, option);
+		// observer.observe(element)
+		// return () => observer.unobserve(element)
+	}, [paginate, handleObserver])
+	
 
 	if (!outings || !Array.isArray(outings)) return null;
 
@@ -79,6 +104,11 @@ const OutingsList = () => {
 			{outings.map(ot => {
 				return <OutingItem key={ot.id} outing={ot} />;
 			})}
+
+			<div className='loader' ref={observerElem}>
+				{/* {isFetchingNextPage && hasNextPage ? 'Loading...' : 'No search left'} */}
+			</div>
+
 		</>
 	);
 };

@@ -50,6 +50,7 @@ export default function NewOuting() {
 			outing: {
 				...data,
 				couple_id: myCouple.id,
+				user_id: me.id,
 			},
 		};
 		const response = await http.post('/api/v1/outings', body);

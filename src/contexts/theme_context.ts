@@ -3,28 +3,40 @@ import { createContext, CSSProperties, useContext } from 'react';
 interface Themes {
 	light: CSSProperties;
 	dark: CSSProperties;
+	layoutLight: CSSProperties;
+	layoutDark: CSSProperties;
 }
 
 export const themes: Themes = {
 	light: {
-		backgroundColor: '#FFFFFF',
-		color: '#413B3A',
+		backgroundColor: 'var(--clrLightBg)',
+		color: 'var(--clrLightText)',
 	},
 	dark: {
-		backgroundColor: '#413B3A',
-		color: '#EEEEEE',
+		backgroundColor: 'var(--clrDarkBg)',
+		color: 'var(--clrDarkText)',
+	},
+	layoutLight: {
+		backgroundColor: 'var(--clrLightBehind)',
+		color: 'var(--clrLightText)',
+	},
+	layoutDark: {
+		backgroundColor: 'var(--clrDarkBehind)',
+		color: 'var(--clrDarkText)',
 	},
 };
 
 interface InitialContextValue {
 	isLight: Boolean;
-	theme: CSSProperties;
 	toggleTheme: Function;
+	theme: CSSProperties;
+	layoutTheme: CSSProperties;
 }
 
 export const ThemeContext = createContext<InitialContextValue>({
 	isLight: true,
 	theme: themes.light,
+	layoutTheme: themes.layoutLight,
 	toggleTheme: () => {},
 });
 

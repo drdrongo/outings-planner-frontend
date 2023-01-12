@@ -11,8 +11,8 @@ import { useThemeContext } from '../../contexts/theme_context';
 import http from '../../data/http';
 
 export default function Outings() {
+	console.log('reloading outings.tsx');
   let { outingId } = useParams();
-  console.log({ outingId })
 
 	let [searchParams, setSearchParams] = useSearchParams(); // works like setState, but stores data in the search params instead
 	const { outings, doSearch, clearSearch, setOutingId } = useOutingsContext();
@@ -41,7 +41,8 @@ export default function Outings() {
 					padding: '1rem',
 				}}
 			>
-				<input
+				{/* TODO: Yeah this doesn't need to exist here? */}
+				{/* <input
 					value={searchParams.get('title') || ''}
 					onChange={event => {
 						const title = event.target.value;
@@ -51,7 +52,7 @@ export default function Outings() {
 							setSearchParams({});
 						}
 					}}
-				/>
+				/> */}
 				
 			</nav>
 			<Outlet /> {/* Renders the child route's element, if there is one.*/}
