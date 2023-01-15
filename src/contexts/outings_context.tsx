@@ -10,6 +10,7 @@ type GlobalOutings = {
 	updateOuting: Function;
 	setOutingId: Function;
 	isFetchingOutings: Boolean;
+	lastPageReached: Boolean;
 };
 
 export const OutingsContext = createContext<GlobalOutings>({
@@ -21,6 +22,7 @@ export const OutingsContext = createContext<GlobalOutings>({
 	updateOuting: () => {},
 	setOutingId: () => {},
 	isFetchingOutings: false,
+	lastPageReached: false,
 });
 
 export const useOutingsContext = () => useContext(OutingsContext);

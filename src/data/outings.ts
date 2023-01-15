@@ -61,13 +61,11 @@ class Outing {
   // ----- Fetch multiple ------
   static fetchOutings: Function = async (params: object) => {
     // TODO: we need search params here.
-    console.log({ params })
     const { data, is_last_page, errors }: {
       data?: IOuting[];
       is_last_page?: boolean;
       errors?: any;
     } = await http.get('/api/v1/outings', params);
-    console.log({ data, is_last_page, errors })
     if (data) {
       return { data, is_last_page };
     } else {
@@ -119,7 +117,6 @@ class Outing {
     } = await http.update(`/api/v1/outings/${id}`, params);
     
     if (data) {
-      console.log({ dataInUpdateOuting: data })
       return data;
     } else {
       console.error(errors);

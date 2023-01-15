@@ -7,15 +7,10 @@ interface IProps {
 }
 
 const PageLayout = ({ children, ...rest }: IProps) => {
-	const { theme } = useThemeContext();
-
 	return (
 		<div
-			className={`main ${rest.classes ? rest.classes : ''}`}
-			style={{
-				...theme,
-				...rest.style,
-			}}
+			className="main"
+			style={{ backgroundColor: 'var(--clrBase)' }}
 			{...rest}
 		>
 			{children}

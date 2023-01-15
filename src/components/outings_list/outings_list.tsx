@@ -35,7 +35,7 @@ const OutingItem = ({ outing }: OutingItemProps) => {
 				}}
 			>
 
-				<h3>{outing.title}</h3>
+				<h3 style={{ color: '#FFFFFF' }}>{outing.title}</h3>
 				<Avatar
 					src={
 						outing.user_image
@@ -74,26 +74,25 @@ interface OutingsListProps {
 }
 
 const OutingsList = () => {
-	const { outings, paginate, isFetchingOutings } = useOutingsContext();
+	const { outings, paginate, isFetchingOutings, lastPageReached } = useOutingsContext();
   const observerElem = useRef(null)
 
 	const handleObserver = useCallback((entries) => {
 		const [target] = entries
-		if(target.isIntersecting && !isFetchingOutings) {
-			console.log("yep, we are paginating.")
+		if(target.isIntersecting && !isFetchingOutings && !lastPageReached) {
 			paginate();
 		}
-	}, [paginate, isFetchingOutings])
+	}, [paginate, isFetchingOutings, lastPageReached])
 	
 	useEffect(() => {
-		// const element = observerElem.current
-		// if (!element) return;
+		const element = observerElem.current
+		if (!element) return;
 
-		// const option = { threshold: 0 }
+		const option = { threshold: 0 }
 	
-		// const observer = new IntersectionObserver(handleObserver, option);
-		// observer.observe(element)
-		// return () => observer.unobserve(element)
+		const observer = new IntersectionObserver(handleObserver, option);
+		observer.observe(element)
+		return () => observer.unobserve(element)
 	}, [paginate, handleObserver])
 	
 

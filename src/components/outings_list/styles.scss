@@ -7,11 +7,12 @@
   font-size: 2.2rem;
   text-decoration: none;
   color: black;
-  background-color: white;
+  background-color: var(--clrBg);
   border-radius: 1rem;
   margin-bottom: 1.5rem;
   flex-direction: column;
   overflow: hidden;
+  color: var(--clrText);
 
   &:hover {
     filter: brightness(0.9);
@@ -37,7 +38,7 @@
     }
 
     h3 {
-      color: white;
+      color: var(--clrText);
       margin-bottom: 0;
       position: relative;
     }

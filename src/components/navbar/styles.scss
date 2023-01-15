@@ -6,7 +6,7 @@
   align-items: center;
   width: 100%;
   flex-shrink: 0;
-  background-color: var(--clrSecondary);
+  background-color: var(--clrNavBg);
 
   @include phone {
     border-top: 1px solid rgba(0, 0, 0, 0.3);
@@ -27,7 +27,7 @@
     justify-content: center;
     white-space: nowrap;
     width: 100%;
-    color: var(--clrText1);
+    color: #ABABAB;
     border-bottom: 1px solid var(--clrTheme);
 
     &>svg {
@@ -42,8 +42,7 @@
 
     &.active,
     &:hover {
-      background-color: var(--clrTheme);
-      color: var(--clrSecondary);
+      color: var(--clrText);
     }
   }
 }

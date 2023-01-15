@@ -54,7 +54,6 @@ http.makeRequest = async function (method: string, api: string, body: object) {
 	} else if (hasBody) {
 		jsonBody = JSON.stringify(body);
 	}
-	console.log({ method })
 	const response = await fetch(api, {
 		method,
 		headers: {

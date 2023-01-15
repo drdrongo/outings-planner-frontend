@@ -6,9 +6,8 @@ interface Props {
 }
 
 const OutingLogo = ({ className='' }: Props) => {
-	const { theme } = useThemeContext();
 	const themeColor = 'var(--clrTheme)'
-	const secondColor = theme.color;
+	const secondColor = 'var(--clrText)'
 
 	return (
 		<svg

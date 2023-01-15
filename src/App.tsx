@@ -19,8 +19,10 @@ import Users from './routes/users';
 import { useResponsiveContext } from './contexts/responsive_context';
 import MyCouple from './routes/my_couple/my_couple';
 import OutingsList from './components/outings_list/outings_list';
+import { useThemeContext } from './contexts/theme_context';
 
 function App() {
+	const { isLight } = useThemeContext();
 	const { isMobile, isDesktop } = useResponsiveContext();
 	const [loaded, setLoaded] = useState(false);
 	const { me, updateMe } = useAuthContext();
@@ -61,7 +63,7 @@ function App() {
 	}, []);
 
 	return (
-		<div id="App">
+		<div id="App" className={`theme-${isLight ? 'light' : 'dark'}`}>
 			{!loaded && <LoadingScreen />}
 
 			<Header />

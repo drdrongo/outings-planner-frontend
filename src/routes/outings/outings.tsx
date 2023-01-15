@@ -9,9 +9,9 @@ import OutingsList from '../../components/outings_list/outings_list';
 import { useOutingsContext } from '../../contexts/outings_context';
 import { useThemeContext } from '../../contexts/theme_context';
 import http from '../../data/http';
+import './styles.scss';
 
 export default function Outings() {
-	console.log('reloading outings.tsx');
   let { outingId } = useParams();
 
 	let [searchParams, setSearchParams] = useSearchParams(); // works like setState, but stores data in the search params instead
@@ -32,8 +32,8 @@ export default function Outings() {
 	}, [searchParams]);
 
 	return (
-		<div className="main" style={{
-			...theme,
+		<div className="outings" style={{
+			// ...theme,
 		}}>
 			<nav
 				style={{

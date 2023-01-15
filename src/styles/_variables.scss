@@ -1,26 +1,55 @@
 :root {
   --clrTheme: #A3C4F3;
-  --clrDarkTheme: #273346;
-  --clrLightTheme: var(--clrTheme);
+  --clrThemeLight: var(--clrTheme);
+  --clrThemeDark: #413B3A;
 
-  --clrPrimary: var(--clrLightTheme);
-  --clrSecondary: #FFFFFF;
-  --clrTertiary: #413B3A;
 
-  --clrText: var(--clrTertiary);
-  --clrText1: var(--clrText);
+  .theme-dark {
+    --clrDarkIpt: #5E5555;
+    --clrIpt: var(--clrDarkIpt);
+
+    --clrDarkBorder: var(--clrThemeDark);
+    --clrBorder: var(--clrDarkBorder);
+
+    --clrDarkBg: var(--clrThemeDark);
+    --clrBg: var(--clrDarkBg);
   
-  --clrDarkBehind: #273346;
-  --clrLightBehind: #A3C4F3;
+    --clrDarkBase: #273346;
+    --clrBase: var(--clrDarkBase);
 
-  --clrDarkBg: #273346;
-  --clrLightBg: var(--clrTheme);
-
-  --clrDarkText: #FFFFFF;
-  --clrLightText: var(--clrText);
+    --clrDarkBgHeader: #273346;
+    --clrBgHeader: var(--clrDarkBgHeader);
   
-  --clrBg: var(--clrSecondary);
-  --clrBg1: var(--clrBg);
+    --clrDarkText: #FFFFFF;
+    --clrText: var(--clrDarkText);
 
-  --clrHighlight: var(--clrPrimary);
+    --clrDarkNavBg: #413B3A;
+    --clrNavBg: var(--clrDarkNavBg);
+  }
+  .theme-light {
+    --clrLightIpt: #FCFCFC;
+    --clrIpt: var(--clrDarkIpt);
+
+    --clrLightBorder: var(--clrThemeLight);
+    --clrBorder: var(--clrDarkBorder);
+
+    --clrLightBg: #FFFFFF;
+    --clrBg: var(--clrLightBg);
+  
+    --clrLightBase: var(--clrThemeLight);
+    --clrBase: var(--clrLightBase);
+
+    --clrLightBgHeader: #FFFFFF;
+    --clrBgHeader: var(--clrLightBgHeader);
+  
+    --clrLightText: var(--clrThemeDark);
+    --clrText: var(--clrLightText);
+
+    --clrLightNavBg: #FFFFFF;
+    --clrNavBg: var(--clrLightNavBg);
+  }
+
 }
+
+
+

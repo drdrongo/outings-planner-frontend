@@ -33,6 +33,7 @@ const useOutings = () => {
 	const [lastPageReached, setLastPageReached] = useState(false);
 
 	const [searchState, searchDispatch] = useReducer(reducer, { page: 1 });
+
 	const updateOuting = async (id: number, params: IOutingUpdParams) => {
 		const res: IOuting | undefined = await Outing.updateOuting(id, params);
 		if (res) {
@@ -60,29 +61,26 @@ const useOutings = () => {
 	};
 
 	const paginate = () => {
-		console.log('paginating!')
-		if (lastPageReached) return;
-
 		searchDispatch({ type: 'paginate' });
 	};
 
-	const getOutings = useCallback(async () => {
-		if (lastPageReached) return;
+	useEffect(() => {
+		getOutings();
+	}, [searchState]);
 
+	const getOutings = useCallback(async () => {
 		setIsFetchingOutings(true);
 		const { data, is_last_page } = await Outing.fetchOutings(searchState);
-		console.log({ data })
 		setIsFetchingOutings(false);
 
 		if (is_last_page) {
 			setLastPageReached(true);
 		}
 		if (data) setOutings((prev) => [ ...prev, ...data ]);
-	}, [searchState, lastPageReached]);
+	}, [searchState]);
 
 	const getOuting = useCallback(async () => {
 		const res = await Outing.fetchOuting(outingId);
-		console.log({ resto: res });
 		if (res) setOuting(res);
 	}, [outingId]);
 
@@ -95,10 +93,20 @@ const useOutings = () => {
 	}, [getOuting, outingId]);
 
 	useEffect(() => {
-		// getOutings();
-	}, [getOutings]);
+		getOutings();
+	}, []);
 
-	return { outings, outing, setOutingId, doSearch, clearSearch, paginate, updateOuting, isFetchingOutings };
+	return {
+		outings,
+		outing,
+		setOutingId,
+		doSearch,
+		clearSearch,
+		paginate,
+		updateOuting,
+		isFetchingOutings,
+		lastPageReached
+	};
 };
 
 export default useOutings;

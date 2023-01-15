@@ -21,12 +21,11 @@ const Header = () => {
 				borderBottomWidth: '1px',
 				borderBottomStyle: 'solid',
 				borderBottomColor: theme.color,
-				backgroundColor: theme.backgroundColor
+				// backgroundColor: theme.backgroundColor
 			}}
 		>
 
 				<OutingLogo />
-				
 				
 				{me.auth && <h3>Hello, {me.f_name}</h3>}
 
